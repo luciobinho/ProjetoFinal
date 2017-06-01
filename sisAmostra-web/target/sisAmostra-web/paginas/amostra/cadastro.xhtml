@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+					<ui:define name="conteudo">
+			<div class="panel-body">
+				<div class="tab-pane active" id="details">
+					<form action="" class="form-horizontal tabular-form">
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Descrição</label>
+							<div class="col-sm-8 tabular-border">
+								<h:inputText required="true" requiredMessage="Descrição da Amostra obrigatório." type="text" class="form-control" value="#{amostraMB.amostra.descricao}"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Condição de Armazenamento</label>
+							<div class="col-sm-8 tabular-border">
+								<h:inputTextarea required="true" value="#{amostraMB.amostra.dsCondicaoArmazenamento}" cols="30" rows="3" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Classe Amostra</label>
+							<div class="col-sm-8 tabular-border">
+								<select class="form-control" multiple="">
+									<option>Lorem ipsum dolor.</option>
+									<option>Amet, impedit aperiam?</option>
+									<option>Nemo, alias, quasi?</option>
+									<option>Inventore, expedita.</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Tipo Ensaio</label>
+							<div class="col-sm-8 tabular-border">
+								<select class="form-control" multiple="">
+									<option>Lorem ipsum dolor.</option>
+									<option>Amet, impedit aperiam?</option>
+									<option>Nemo, alias, quasi?</option>
+									<option>Inventore, expedita.</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Status</label>
+							<div class="col-sm-8 tabular-border">
+								<select class="form-control" multiple="">
+									<option>Lorem ipsum dolor.</option>
+									<option>Amet, impedit aperiam?</option>
+									<option>Nemo, alias, quasi?</option>
+									<option>Inventore, expedita.</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Available Date</label>
+							<div class="col-sm-8 tabular-border">
+								<div class="input-daterange input-group" id="datepicker-range">
+									<input type="text" class="input-small form-control" name="start"/>
+									<span class="input-group-addon">to</span>
+									<input type="text" class="input-small form-control" name="end"/>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="" class="control-label col-sm-2">Price</label>
+							<div class="col-sm-8 tabular-border">
+								<input type="text" class="form-control"/>
+							</div>
+						</div>
+						<div class="form-group pb0">
+							<label for="" class="control-label col-sm-2">Published Status</label>
+							<div class="col-sm-8 tabular-border">
+								<select class="form-control">
+									<option value="">Draft</option>
+									<option value="">Published</option>
+								</select>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

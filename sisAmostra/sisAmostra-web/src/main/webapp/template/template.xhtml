@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>SisAmostra - Sistema de Amostra Químicas</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<meta name="description" content="Avalon Admin Theme" />
+	<meta name="author" content="The Red Team" />
+
+	<link
+		href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700"
+		rel="stylesheet" type="text/css" />
+
+	<link
+		href="../../resources/bootstrap/plugins/jstree/dist/themes/avalon/style.min.css"
+		type="text/css" rel="stylesheet" />
+	<link
+		href="../../resources/bootstrap/plugins/codeprettifier/prettify.css"
+		type="text/css" rel="stylesheet" />
+	<link
+		href="../../resources/bootstrap/plugins/iCheck/skins/minimal/blue.css"
+		type="text/css" rel="stylesheet" />
+
+	<link href="../../resources/bootstrap/css/styles.css" type="text/css"
+		rel="stylesheet" />
+	<link href="../../resources/bootstrap/css/datepicker.css"
+		type="text/css" rel="stylesheet" />
+	<link
+		href="../../resources/bootstrap/fonts/font-awesome/css/font-awesome.min.css"
+		type="text/css" rel="stylesheet" />
+
+</h:head>
+
+<h:body class="infobar-offcanvas" style="">
+	<ui:insert name="header">
+		<ui:include src="/template/cabecalho.xhtml" />
+	</ui:insert>
+	<div id="page">
+
+
+		<div id="content">
+			<div id="wrapper">
+				<div id="layout-static">
+					<ui:insert name="menu">
+						<ui:include src="/template/menu.xhtml" />
+					</ui:insert>
+
+					<div class="static-content-wrapper">
+						<div class="page-heading">
+							<div class="options">
+								<div class="btn-toolbar"></div>
+							</div>
+						</div>
+
+						<div class="static-content">
+							<div class="page-content">
+								<ui:insert name="conteudo">
+
+								</ui:insert>
+							</div>
+						</div>
+						<div id="footer">
+							<ui:insert name="footer">
+								<ui:include src="/template/rodape.xhtml" />
+							</ui:insert>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script
+		src="../../resources/bootstrap/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+	<script src="../../resources/bootstrap/js/jquery-1.10.2.min.js"></script>
+	<script src="../../resources/bootstrap/js/jqueryui-1.9.2.min.js"></script>
+	<script src="../../resources/bootstrap/js/bootstrap.min.js"></script>
+	<script
+		src="../../resources/bootstrap/plugins/sparklines/jquery.sparklines.min.js"></script>
+	<script
+		src="../../resources/bootstrap/plugins/jstree/dist/jstree.min.js"></script>
+	<script
+		src="../../resources/bootstrap/plugins/codeprettifier/prettify.js"></script>
+	<script
+		src="../../resources/bootstrap/plugins/bootstrap-switch/bootstrap-switch.js"></script>
+	<script
+		src="../../resources/bootstrap/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"></script>
+	<script src="../../resources/bootstrap/plugins/iCheck/icheck.min.js"></script>
+	<script src="../../resources/bootstrap/js/enquire.min.js"></script>
+	<script src="../../resources/bootstrap/plugins/bootbox/bootbox.js"></script>
+	<script
+		src="../../resources/bootstrap/plugins/simpleWeather/jquery.simpleWeather.min.js"></script>
+	<script src="../../resources/bootstrap/js/application.js"></script>
+	<script src="../../resources/bootstrap/demo/demo.js"></script>
+	<script src="../../resources/bootstrap/demo/demo-switcher.js"></script>
+
+	<script type="text/javascript">
+		$(function () {
+			$('#datepicker input').datepicker();
+			$('#example1').datepicker({
+                format: "dd/mm/yyyy"
+            }); 
+	    })
+	</script>
+</h:body>
+</html>

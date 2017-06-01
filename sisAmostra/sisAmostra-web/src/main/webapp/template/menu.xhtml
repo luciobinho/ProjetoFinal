@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+		<div class="static-sidebar-wrapper sidebar-default">
+			<div class="static-sidebar" style="top: 50px;">
+				<div class="sidebar">
+					<div class="widget stay-on-collapse">
+						<div class="widget-body welcome-box tabular">
+							<div class="tabular-row">
+								<div class="tabular-cell welcome-avatar">
+									<a href="#"><img src="assets/demo/avatar/avatar_06.png"
+										class="avatar" /></a>
+								</div>
+								<div class="tabular-cell welcome-options">
+									<span class="welcome-text">Welcome,</span> <a href="#"
+										class="name">Alexander Smith</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="widget stay-on-collapse" id="widget-sidebar">
+						<span class="widget-heading">Explore</span>
+						<nav role="navigation" class="widget-body">
+							<ul class="acc-menu">
+								<li><a href="index.html"><i class="fa fa-home"></i><span>Dashboard</span><span
+										class="badge badge-dark">1</span></a></li>
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-flask"></i><span>Amostra</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterAmostra.jsf">Manter Amostra</a></li>
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterClasse.jsf">Manter Classe</a></li>
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterTipoEnsaio.jsf">Manter Tipo Ensaio</a></li>
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterStatusAmostra.jsf">Manter Status</a></li>
+									</ul></li>
+								<li class="hasChild"><a href="javascript:;"><i
+									class="fa fa-cogs"></i><span>Análise</span></a>
+								<ul class="acc-menu">
+									<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/analise/manterAnalise.jsf">Manter Análise</a></li>
+								</ul></li>
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-cogs"></i><span>Laboratório</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/laboratorio/manterLaboratorio.jsf">Manter Laboratório</a></li>
+									</ul></li>
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-random"></i><span>Equipamento</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/equipamento/manterEquipamento.jsf">Manter Equipamento</a></li>
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/equipamento/manterStatusEquipamento.jsf">Manter Status</a></li>
+									</ul></li>
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-pencil"></i><span>Devolução</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/devolucao/manterDevolucao.jsf">Manter Devolução</a></li>
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/devolucao/manterMotivoDevolucao.jsf">Manter Motivo Devolução</a></li>
+									</ul></li>
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-table"></i><span>Tarefa</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/tarefa/manterTarefa.jsf">Manter Tarefa</a></li>
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/tarefa/manterStatusTarefa.jsf">Manter Status</a></li>
+									</ul></li>
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-table"></i><span>Usuário</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/usuario/manterUsuario.jsf">Manter Usuário</a></li>
+									</ul></li>	
+							</ul>		
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
+	</ui:composition>

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+    <h:body>
+        <ui:composition template="/template/template.xhtml">
+			<ui:define name="conteudo">
+				<div class="row">
+					<div class="col-md-12">
+						<form action="" class="form-inline mb10">
+							<div class="form-group">
+								Amostra - Manter Status
+							</div>
+						</form>
+			
+						<div class="panel">
+							<div class="panel-body panel-no-padding">
+								<h:form rendered="#{not empty statusAmostraMB.listStatusAmostras}">
+					        		<h:dataTable class="table table-striped table-bordered" value="#{statusAmostraMB.listStatusAmostras}" var="item">
+					            		<h:column><f:facet name="header">ID</f:facet>#{item.idStatus}</h:column>
+					            		<h:column><f:facet name="header">Descrição</f:facet>#{item.descricao}</h:column>
+					            		<h:column>
+					                		<h:commandButton value="edit" action="#{simpleCrudBean.edit(item)}" />
+					            		</h:column>
+							            <h:column>
+							                <td>
+												<!-- <a href="#{statusAmostraMB.detalhar(item)}" class="btn btn-success btn-xs btn-label"><i class="fa fa-search"></i>Detalhar</a>
+												<a href="#{statusAmostraMB.editar(item)}" class="btn btn-default btn-xs btn-label"><i class="fa fa-pencil"></i>Editar</a>
+												<a href="#{statusAmostraMB.excluir(item)}" class="btn btn-danger btn-xs btn-label"><i class="fa fa-trash-o"></i>Excluir</a> -->
+											</td>
+							            </h:column>
+							        </h:dataTable>
+							        <div class="btn btn-default">Novo</div>
+					    		</h:form>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			    <h:panelGroup rendered="#{empty statusAmostraMB.listStatusAmostras}">
+			        <p>Não existe Status cadastrado. Efetue um Novo cadastro!</p>
+
+			        <h2 class="active">Novo Status</h2>
+			        
+						<div class="panel-body">
+							<div class="tab-pane active" id="details">
+								<h:form class="form-horizontal tabular-form">
+									<div class="form-group">
+										<label for="" class="control-label col-sm-2">Descrição</label>
+										<div class="col-sm-8 tabular-border">
+											<input type="text" class="form-control" value="#{statusAmostraMB.statusAmostra.descricao}"/>
+										</div>
+									</div>
+								</h:form>
+							</div>
+						</div>
+			            <p>
+			                <button onclick="#{statusAmostraMB.salvar()}" class="btn btn-default"><i class="fa fa-save"></i>Salvar</button>
+			                <button class="btn btn-default"><i class="fa fa-forward"></i>Cancelar</button>
+			            </p>
+			    </h:panelGroup>
+			    
+			    <!-- <h:panelGroup rendered="">
+			        <h3>Editar Status #{statusAmostraMB.statusAmostra.idStatus}</h3>
+			        <h:form>
+			            <p>Descrição: <h:inputText value="#{statusAmostraMB.statusAmostra.descricao}" /></p>
+			            <p>
+			                <h:commandButton value="Salvar" action="#{statusAmostraMB.salvar}" />
+			                <h:commandButton value="Cancelar" />
+			            </p>
+			        </h:form>
+			    </h:panelGroup> -->
+						
+			</ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

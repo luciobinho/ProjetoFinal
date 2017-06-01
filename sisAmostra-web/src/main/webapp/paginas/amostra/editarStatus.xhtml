@@ -1,0 +1,74 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="frmStatusAmostra">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+						<h2>ATERAÇÃO - STATUS AMOSTRA</h2>
+					</div>
+					<h:messages autoUpdate="true"/>
+					<div class="row">
+						<h:dataTable
+							class="table table-striped table-bordered dataTable no-footer"
+							cellspacing="0" width="100%" role="grid"
+							aria-describedby="example_info" style="width: 100%;"
+							value="#{statusAmostraMB.statusAmostra}" var="item"
+							border="1">
+							<h:column>
+								<f:facet name="header" class="sorting_asc" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									aria-sort="ascending" style="width: 196px;">
+									<h:outputText value="CÓDIGO" />
+								</f:facet>
+								<h:outputText class="gradeA odd" role="row"
+									value="#{item.idStatus}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header" class="sorting" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									style="width: 212px;">
+									<h:outputText value="Descrição" />
+								</f:facet>
+								<h:inputText class="gradeA odd" role="row"
+									value="#{item.descricao}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header" class="sorting_asc" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									aria-sort="ascending" style="width: 196px;">
+									<h:outputText value="Usuário" />
+								</f:facet>
+								<h:outputText class="gradeA odd" role="row"
+									value="#{item.usuUltAlteracao}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header" class="sorting" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									style="width: 100px;">
+									<h:outputText value="Data de Alteração" />
+								</f:facet>
+								<h:outputText class="gradeA odd" role="row"
+										value="#{item.dtUltAlteracao.time}">
+									<f:convertDateTime pattern ="dd/MM/yyyy" />
+								</h:outputText>			
+							</h:column>
+						</h:dataTable>
+					</div>
+		
+					<div id="actions" class="row">
+						<div class="col-md-12">
+							<h:commandButton value="Salvar" action="#{statusAmostraMB.salvar()}" class="btn btn-primary"/>
+							<h:commandButton value="Cancelar" action="listStatus.jsf" class="btn btn-default"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,33 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+		<h:form id="frmStatusAmostra">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<div class="row">
+						<h2>CADASTRO - STATUS AMOSTRA</h2>
+					</div>
+					<h:messages autoUpdate="true"/>
+					<div class="row">
+						<div class="form-group col-md-4">
+							<label for="campo1">Descrição:</label> 
+							<h:inputText id="descricao" required="true" class="form-control" value="#{statusAmostraMB.statusAmostra.descricao}"/>
+						</div>
+					</div>
+		
+					<div id="actions" class="row">
+						<div class="col-md-12">
+							<h:commandButton value="Salvar" action="#{statusAmostraMB.salvar()}" class="btn btn-primary"/>
+							<h:commandButton value="Cancelar" action="listStatus" class="btn btn-default"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

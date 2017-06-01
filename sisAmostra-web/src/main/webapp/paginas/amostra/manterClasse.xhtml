@@ -1,0 +1,241 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="panel panel-default">
+			<h:form id="formPrincipal">
+				<div class="panel-heading">
+					<h2>MANTER - CLASSE AMOSTRA</h2>
+					<div class="panel-ctrls">
+						<div id="example_filter" class="dataTables_filter pull-right">
+							<label class="panel-ctrls-center"><input type="search"
+								class="form-control" placeholder="Search..."
+								aria-controls="example" /></label>
+						</div>
+						<i class="separator"></i>
+						<div class="dataTables_length pull-left" id="example_length">
+							<label class="panel-ctrls-center"><select
+								name="example_length" aria-controls="example"
+								class="form-control"><option value="10">10</option>
+									<option value="25">25</option>
+									<option value="50">50</option>
+									<option value="100">100</option></select></label>
+						</div>
+					</div>
+				</div>
+				<h:panelGroup id="formTabela"
+					rendered="#{not empty classeAmostraMB.listClasseAmostras}">
+					<div class="panel-body panel-no-padding">
+						<div id="example_wrapper"
+							class="dataTables_wrapper form-inline no-footer">
+							<div class="row">
+								<div class="col-sm-6"></div>
+								<div class="col-sm-6"></div>
+							</div>
+							<h:dataTable
+								class="table table-striped table-bordered dataTable no-footer"
+								cellspacing="0" width="100%" role="grid"
+								aria-describedby="example_info" style="width: 100%;"
+								value="#{classeAmostraMB.listClasseAmostras}" var="item"
+								border="1">
+								<h:column>
+									<f:facet name="header" class="sorting_asc" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										aria-sort="ascending" style="width: 196px;">
+										<h:outputText value="Código" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.idClasse}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting_asc" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										aria-sort="ascending" style="width: 196px;">
+										<h:outputText value="CD Classe" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.cdClasse}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 212px;">
+										<h:outputText value="Descrição" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.descricao}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting_asc" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										aria-sort="ascending" style="width: 196px;">
+										<h:outputText value="Usuário" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.usuUltAlteracao}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 100px;">
+										<h:outputText value="Data de Alteração" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.dtUltAlteracao.time}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 100px;">
+										<h:outputText value="Ações" />
+									</f:facet>
+									<h:commandButton class="btn btn-warning btn-xs"
+										action="#{classeAmostraMB.alterar()}" value="Editar">
+										<f:setPropertyActionListener value="#{item}"
+											target="#{classeAmostraMB.classeAmostra}" />
+									</h:commandButton>
+									<h:commandButton class="btn btn-danger btn-xs"
+										action="#{classeAmostraMB.deletar(item)}" data-toggle="modal"
+										value="Excluir" data-target="#delete-modal" />
+								</h:column>
+							</h:dataTable>
+						</div>
+						<div class="panel-footer">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="dataTables_info" id="example_info" role="status"
+										aria-live="polite">Showing 1 to 10 of 57 entries</div>
+								</div>
+								<div class="col-sm-6">
+									<div class="dataTables_paginate paging_bootstrap"
+										id="example_paginate">
+										<ul class="pagination pull-right m0">
+											<li class="previous disabled"><a href="#">Previous</a></li>
+											<li class="active"><a href="#">1</a></li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#">5</a></li>
+											<li class="next"><a href="#">Next</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</h:panelGroup>
+				<div class="col-md-12">
+					<h:messages autoUpdate="true" />
+					<h:commandButton class="btn btn-primary pull-right h2"
+						value="NOVO ITEM" action="#{classeAmostraMB.novo()}" />
+				</div>
+			</h:form>
+			<!-- cadastro -->
+			<h:form id="formCadastro" rendered="#{classeAmostraMB.cadastrar}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+							<h2>CADASTRAR - CLASSE AMOSTRA</h2>
+						</div>
+						<h:messages autoUpdate="true" />
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label for="campo1">CD Classe:</label>
+								<h:inputText id="cdClasse" required="true" class="form-control"
+									value="#{classeAmostraMB.classeAmostra.cdClasse}" />
+							</div>
+							<div class="form-group col-md-4">
+								<label for="campo1">Descrição:</label>
+								<h:inputText id="descricao" required="true" class="form-control"
+									value="#{classeAmostraMB.classeAmostra.descricao}" />
+							</div>
+						</div>
+
+						<div id="actions" class="row">
+							<div class="col-md-12">
+								<h:commandButton value="Salvar"
+									action="#{classeAmostraMB.salvar()}" class="btn btn-primary" />
+								<h:commandButton value="Cancelar" action="listStatus"
+									class="btn btn-default" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+			<!-- alteração -->
+			<h:form id="formAlteracao" rendered="#{classeAmostraMB.editar}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="row">
+							<h2>ALTERAR - CLASSE AMOSTRA</h2>
+						</div>
+						<h:messages autoUpdate="true" />
+						<h:dataTable
+							class="table table-striped table-bordered dataTable no-footer"
+							cellspacing="0" width="100%" role="grid"
+							aria-describedby="example_info" style="width: 100%;"
+							value="#{classeAmostraMB.classeAmostra}" var="item"
+							border="1">
+							<h:column>
+								<f:facet name="header" class="sorting_asc" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									aria-sort="ascending" style="width: 196px;">
+									<h:outputText value="Código" />
+								</f:facet>
+								<h:outputText class="gradeA odd" role="row"
+									value="#{item.idClasse}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header" class="sorting_asc" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									aria-sort="ascending" style="width: 196px;">
+									<h:outputText value="Usuário" />
+								</f:facet>
+								<h:outputText class="gradeA odd" role="row"
+									value="#{item.usuUltAlteracao}" />
+							</h:column>
+							<h:column>
+								<f:facet name="header" class="sorting" tabindex="0"
+									aria-controls="example" rowspan="1" colspan="1"
+									style="width: 100px;">
+									<h:outputText value="Data de Alteração" />
+								</f:facet>
+								<h:outputText class="gradeA odd" role="row"
+									value="#{item.dtUltAlteracao.time}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+							</h:column>
+						</h:dataTable>
+						<div class="row">
+							<div class="form-group col-md-4">
+								<label for="campo1">CD Classe:</label>
+								<h:inputText id="cdClasse" required="true" class="form-control"
+									value="#{classeAmostraMB.classeAmostra.cdClasse}" />
+							</div>
+							<div class="form-group col-md-4">
+								<label for="campo1">Descrição:</label>
+								<h:inputText id="descricao" required="true" class="form-control"
+									value="#{classeAmostraMB.classeAmostra.descricao}" />
+							</div>
+						</div>
+
+						<div id="actions" class="row">
+							<div class="col-md-12">
+								<h:commandButton value="Salvar" 
+									action="#{classeAmostraMB.salvar()}" class="btn btn-primary" />
+								<h:commandButton value="Cancelar" action="listStatus"
+									class="btn btn-default" />
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+

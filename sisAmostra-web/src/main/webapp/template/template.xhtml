@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<title>SisAmostra - Sistema de Amostra Químicas</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-touch-fullscreen" content="yes" />
+	<meta name="description" content="Avalon Admin Theme" />
+	<meta name="author" content="The Red Team" />
+
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700" rel="stylesheet" type="text/css" />
+	<link href="../../resources/bootstrap/fonts/font-awesome/css/font-awesome.css" type="text/css" rel="stylesheet" />
+	<!-- Font Awesome -->
+	<link href="../../resources/bootstrap/css/styles.css" type="text/css" rel="stylesheet" />
+	<!-- Core CSS with all styles -->
+	<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700' rel='stylesheet' type='text/css' />
+	<link href="../../resources/bootstrap/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet" />
+	<link href="../../resources/bootstrap/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
+
+	<link href="../../resources/bootstrap/plugins/jstree/dist/themes/avalon/style.min.css" type="text/css" rel="stylesheet" />		<!-- jsTree -->
+	<link href="../../resources/bootstrap/plugins/codeprettifier/prettify.css" type="text/css" rel="stylesheet" />		<!-- Code Prettifier -->
+	<link href="../../resources/bootstrap/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet" />		<!-- iCheck -->
+
+	<link href="../../resources/bootstrap/plugins/form-daterangepicker/daterangepicker-bs3.css" type="text/css" rel="stylesheet" />		<!-- DateRangePicker -->
+	<link href="../../resources/bootstrap/plugins/switchery/switchery.css" type="text/css" rel="stylesheet" />		<!-- Switchery -->
+	<link href="../../resources/bootstrap/plugins/fullcalendar/fullcalendar.css" type="text/css" rel="stylesheet" />		<!-- FullCalendar -->
+
+	<script src="../../resources/jquery/js/jquery-1.10.2.min.js"></script>		<!-- Load jQuery -->
+	<script src="../../resources/jquery/js/jqueryui-1.9.2.min.js"></script>		<!-- Load jQueryUI -->
+	<script src="../../resources/jquery/js/bootstrap.min.js"></script>		<!-- Load Bootstrap -->
+	<script src="../../resources/jquery/plugins/sparklines/jquery.sparklines.min.js"></script>		<!-- Sparkline -->
+	<script src="../../resources/jquery/plugins/jstree/dist/jstree.min.js"></script>		<!-- jsTree -->
+	<script src="../../resources/jquery/plugins/codeprettifier/prettify.js"></script>	<!-- Code Prettifier  -->
+	<script	src="../../resources/jquery/plugins/bootstrap-switch/bootstrap-switch.js"></script>	<!-- Swith/Toggle Button -->
+	<script	src="../../resources/jquery/plugins/bootstrap-tabdrop/js/bootstrap-tabdrop.js"></script>	<!-- Bootstrap Tabdrop -->
+	<script src="../../resources/jquery/plugins/iCheck/icheck.min.js"></script>	<!-- iCheck -->
+	<script src="../../resources/jquery/js/enquire.min.js"></script> <!-- Enquire for Responsiveness -->
+	<script src="../../resources/jquery/plugins/bootbox/bootbox.js"></script>	<!-- Bootbox -->
+	<script	src="../../resources/jquery/plugins/simpleWeather/jquery.simpleWeather.min.js"></script> <!-- Weather plugin-->
+	<script src="../../resources/jquery/js/application.js"></script>
+	<script src="../../resources/jquery/demo/demo.js"></script>
+	<script src="../../resources/jquery/demo/demo-switcher.js"></script>
+		
+	<style type="text/css">
+.jqstooltip {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	visibility: hidden;
+	background: rgb(0, 0, 0) transparent;
+	background-color: rgba(0, 0, 0, 0.6);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,
+		endColorstr=#99000000);
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000, endColorstr=#99000000)";
+	color: white;
+	font: 10px arial, san serif;
+	text-align: left;
+	white-space: nowrap;
+	padding: 5px;
+	border: 1px solid white;
+	z-index: 10000;
+}
+
+.jqsfield {
+	color: white;
+	font: 10px arial, san serif;
+	text-align: left;
+}
+</style>
+</h:head>
+
+<h:body class="infobar-offcanvas" style="">
+	<!-- Modal -->
+	<div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+	    <div class="modal-dialog" role="document">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
+	                <h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+	            </div>
+	            <div class="modal-body">Deseja realmente excluir este item? </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-primary">Sim</button>
+	                <button type="button" class="btn btn-default" data-dismiss="modal">N&atilde;o</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	<div id="page">
+		<div id="header">
+			<ui:insert name="header">
+				<ui:include src="/template/cabecalho.xhtml" />
+			</ui:insert>
+		</div>
+
+		<div id="content">
+			<div id="wrapper">
+            	<div id="layout-static">
+                	<ui:insert name="menu">
+                		<ui:include src="/template/menu.xhtml"/>
+                	</ui:insert>
+                	
+                	<div class="static-content-wrapper">
+	                	<div class="page-heading">            
+	                    	<div class="options">
+	    						<div class="btn-toolbar">
+	    						</div>
+							</div>
+	                    </div>
+	                    
+                    	<div class="static-content">
+	                    	<div class="page-content">
+								<ui:insert name="conteudo">
+								
+								</ui:insert>
+		                    </div>
+		                </div>    
+						<div id="footer">
+							<ui:insert name="footer">
+								<ui:include src="/template/rodape.xhtml" />
+							</ui:insert>
+						</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+</h:body>
+</html>

@@ -1,0 +1,4 @@
+br\com\sisAmostra\Entity\Amostra.class
+br\com\sisAmostra\Entity\StatusAmostra.class
+br\com\sisAmostra\Service\StatusAmostraService.class
+br\com\sisAmostra\Generic\GenericEntityManager.class
