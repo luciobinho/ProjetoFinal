@@ -31,11 +31,6 @@ public class TipoEnsaioMB {
 	public void init() {
 		carregarListas();
 
-		if (listTipoEnsaios.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Tipo de Ensaio cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

@@ -10,9 +10,14 @@
 				<div class="panel-heading">
 					<h2>MANTER - TIPO DE ENSAIO</h2>
 				</div>
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty tipoEnsaioMB.listTipoEnsaios and !tipoEnsaioMB.cadastrar and !tipoEnsaioMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty tipoEnsaioMB.listTipoEnsaios}">
-					<h:messages autoUpdate="true" />
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">
@@ -112,11 +117,15 @@
 							</div>
 						</div>
 					</div>
+				</h:panelGroup>
+
+				<h:panelGroup rendered="#{!tipoEnsaioMB.cadastrar and !tipoEnsaioMB.editar}">
 					<div class="col-md-12">
 						<h:commandButton class="btn btn-primary pull-right h2" value="Novo"
 							action="#{tipoEnsaioMB.novo()}" />
 					</div>
 				</h:panelGroup>
+					
 				<!-- cadastro -->
 				<h:panelGroup id="formCadastro" rendered="#{tipoEnsaioMB.cadastrar}">
 					<div class="panel panel-default">

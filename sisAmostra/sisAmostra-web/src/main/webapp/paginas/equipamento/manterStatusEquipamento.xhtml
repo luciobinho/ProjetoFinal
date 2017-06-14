@@ -13,6 +13,11 @@
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty statusEquipamentoMB.listStatusEquipamentos}">
 					<h:messages autoUpdate="true" />
+					<h:panelGroup rendered="#{empty statusEquipamentoMB.listStatusEquipamentos and !statusEquipamentoMB.cadastrar and !statusEquipamentoMB.editar}">
+						<div class="panel-heading">
+							<h3>Nenhum registro cadastrado!</h3>
+						</div>	
+					</h:panelGroup>
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">

@@ -19,7 +19,28 @@
 		<url-pattern>*.jsf</url-pattern>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
+	
+	<filter>
+		<filter-name>LoginFilter</filter-name>
+		<filter-class>br.com.sisAmostra.LoginFilter.LoginFilter</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>LoginFilter</filter-name>
+	</filter-mapping>
+
+    <error-page>
+    	<error-code>404</error-code>
+        <location>/paginas/principal/404.jsf</location>
+    </error-page>
+      <error-page>
+  	<error-code>500</error-code>
+        <location>/paginas/principal/500.jsf</location>
+    </error-page>
+    
 	<welcome-file-list>
-		<welcome-file>/index.html</welcome-file>
+		<welcome-file>/paginas/principal/login.jsf</welcome-file>
 	</welcome-file-list>
+	
+	
 </web-app>

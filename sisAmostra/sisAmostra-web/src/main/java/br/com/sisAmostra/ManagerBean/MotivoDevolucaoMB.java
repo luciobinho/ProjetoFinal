@@ -33,12 +33,6 @@ public class MotivoDevolucaoMB {
 	@PostConstruct
 	public void init() {
 		carregarListas();
-
-		if (listMotivoDevolucoes.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Motivo Devolucao cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

@@ -10,9 +10,14 @@
 				<div class="panel-heading">
 					<h2>MANTER - CLASSE AMOSTRA</h2>
 				</div>
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty classeAmostraMB.listClasseAmostras and !classeAmostraMB.cadastrar and !classeAmostraMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty classeAmostraMB.listClasseAmostras}">
-					<h:messages autoUpdate="true" />
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">
@@ -121,12 +126,16 @@
 							</div>
 						</div>
 					</div>
+				</h:panelGroup>
+				
+				<h:panelGroup
+					rendered="#{!classeAmostraMB.cadastrar and !classeAmostraMB.editar}">
 					<div class="col-md-12">
 						<h:messages autoUpdate="true" />
 						<h:commandButton class="btn btn-primary pull-right h2"
 							value="Novo" action="#{classeAmostraMB.novo()}" />
 					</div>
-				</h:panelGroup>
+				</h:panelGroup>	
 				<!-- cadastro -->
 				<h:panelGroup id="formCadastro"
 					rendered="#{classeAmostraMB.cadastrar}">

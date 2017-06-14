@@ -48,10 +48,6 @@ public class EquipamentoMB {
 	@PostConstruct
 	public void init() {
 		carregarListas();
-		
-		if (listaEquipamentos.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Equipamento cadastrado!", ""));
-		}
 	}
 
 	private void carregarListas() {

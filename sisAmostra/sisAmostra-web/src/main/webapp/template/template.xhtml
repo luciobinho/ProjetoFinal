@@ -16,28 +16,16 @@
 	<meta name="apple-touch-fullscreen" content="yes" />
 	<meta name="description" content="Avalon Admin Theme" />
 	<meta name="author" content="The Red Team" />
+	
+	<ui:param name="root" value="#{request.contextPath}" />
 
-	<link
-		href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700"
-		rel="stylesheet" type="text/css" />
-
-	<link
-		href="../../resources/bootstrap/plugins/jstree/dist/themes/avalon/style.min.css"
-		type="text/css" rel="stylesheet" />
-	<link
-		href="../../resources/bootstrap/plugins/codeprettifier/prettify.css"
-		type="text/css" rel="stylesheet" />
-	<link
-		href="../../resources/bootstrap/plugins/iCheck/skins/minimal/blue.css"
-		type="text/css" rel="stylesheet" />
-
-	<link href="../../resources/bootstrap/css/styles.css" type="text/css"
-		rel="stylesheet" />
-	<link href="../../resources/bootstrap/css/datepicker.css"
-		type="text/css" rel="stylesheet" />
-	<link
-		href="../../resources/bootstrap/fonts/font-awesome/css/font-awesome.min.css"
-		type="text/css" rel="stylesheet" />
+	<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400italic,700" rel="stylesheet" type="text/css" />
+	<link href="#{root}/resources/bootstrap/plugins/jstree/dist/themes/avalon/style.min.css" type="text/css" rel="stylesheet" />
+	<link href="#{root}/resources/bootstrap/plugins/codeprettifier/prettify.css" type="text/css" rel="stylesheet" />
+	<link href="#{root}/resources/bootstrap/plugins/iCheck/skins/minimal/blue.css" type="text/css" rel="stylesheet" />
+	<link href="#{root}/resources/bootstrap/css/styles.css" type="text/css" rel="stylesheet" />
+	<link href="#{root}/resources/bootstrap/css/datepicker.css" type="text/css" rel="stylesheet" />
+	<link href="#{root}/resources/bootstrap/fonts/font-awesome/css/font-awesome.min.css" type="text/css" rel="stylesheet" />
 
 </h:head>
 

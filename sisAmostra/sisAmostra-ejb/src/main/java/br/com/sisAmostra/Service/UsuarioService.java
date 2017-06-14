@@ -47,6 +47,13 @@ public class UsuarioService implements Serializable {
 		usuario = entityManager.merge(usuario);
 		entityManager.remove(usuario);
 	}
+
+	public Usuario validarLogin(Usuario usuario) {
+		TypedQuery<Usuario> query = entityManager.createNamedQuery("Usuario.findLogin", Usuario.class);
+		query.setParameter(0, usuario.getLogin());
+		
+        return query.getSingleResult();
+	}
 }	
 
 

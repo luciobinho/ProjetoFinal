@@ -97,6 +97,12 @@
                </exclusion>
            </exclusions>
        </dependency>
+       
+       <!-- https://mvnrepository.com/artifact/postgresql/postgresql -->
+		<dependency>
+		    <groupId>postgresql</groupId>
+		    <artifactId>postgresql</artifactId>
+		    </dependency>
 
    </dependencies>
 

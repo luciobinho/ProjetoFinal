@@ -31,11 +31,6 @@ public class StatusAmostraMB {
 	public void init() {
 		carregarListas();
 
-		if (listStatusAmostras.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Status Amostra cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

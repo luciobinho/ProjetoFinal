@@ -29,12 +29,6 @@ public class StatusTarefaMB {
 	@PostConstruct
 	public void init() {
 		carregarListas();
-
-		if (listStatusTarefas.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe StatusTarefa cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

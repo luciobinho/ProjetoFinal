@@ -10,9 +10,14 @@
 				<div class="panel-heading">
 					<h2>MANTER - LABORATÓRIO</h2>
 				</div>
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty laboratorioMB.listLaboratorios and !laboratorioMB.cadastrar and !laboratorioMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty laboratorioMB.listLaboratorios}">
-					<h:messages autoUpdate="true" />
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">

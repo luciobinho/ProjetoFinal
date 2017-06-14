@@ -31,11 +31,6 @@ public class LaboratorioMB {
 	public void init() {
 		carregarListas();
 
-		if (listLaboratorios.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Laboratório cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

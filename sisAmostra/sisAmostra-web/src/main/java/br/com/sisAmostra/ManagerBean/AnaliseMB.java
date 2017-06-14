@@ -43,10 +43,6 @@ public class AnaliseMB {
 	public void init() {
 		carregarListas();
 		
-		if (listAnalises.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Análise cadastrada!", ""));
-		}
 	}
 
 	private void carregarListas() {

@@ -11,6 +11,11 @@
 					<h2>MANTER - DEVOLUÇÃO AMOSTRA</h2>
 				</div>
 				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty devolucaoAmostraMB.listDevolucaoAmostras and !devolucaoAmostraMB.cadastrar and !devolucaoAmostraMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty devolucaoAmostraMB.listDevolucaoAmostras}">
 					<div class="panel-body panel-no-padding">

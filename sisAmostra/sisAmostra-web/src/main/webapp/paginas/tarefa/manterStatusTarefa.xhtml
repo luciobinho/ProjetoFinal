@@ -10,7 +10,12 @@
 				<div class="panel-heading">
 					<h2>MANTER - STATUS TAREFA</h2>
 				</div>
-				<h:messages autoUpdate="true" />
+				<h:messages autoUpdate="true" showDetail="true" />
+				<h:panelGroup rendered="#{empty statusTarefaMB.listStatusTarefas and !statusTarefaMB.cadastrar and !statusTarefaMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>	
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty statusTarefaMB.listStatusTarefas}">
 					<div class="panel-body panel-no-padding">

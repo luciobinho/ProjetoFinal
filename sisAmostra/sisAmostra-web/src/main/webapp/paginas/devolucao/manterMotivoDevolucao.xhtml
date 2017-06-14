@@ -11,6 +11,11 @@
 					<h2>MANTER - Motivo Devolucao</h2>
 				</div>
 				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty motivoDevolucaoMB.listMotivoDevolucoes and !motivoDevolucaoMB.cadastrar and !motivoDevolucaoMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty motivoDevolucaoMB.listMotivoDevolucoes}">
 					<div class="panel-body panel-no-padding">

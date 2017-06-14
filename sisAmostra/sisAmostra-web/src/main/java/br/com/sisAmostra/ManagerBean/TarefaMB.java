@@ -48,12 +48,6 @@ public class TarefaMB {
 	@PostConstruct
 	public void init() {
 		carregarListas();
-
-		if (listTarefas.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Tarefa cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

@@ -32,11 +32,6 @@ public class StatusEquipamentoMB {
 	public void init() {
 		carregarListas();
 
-		if (listStatusEquipamentos.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Status Equipamento cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {
