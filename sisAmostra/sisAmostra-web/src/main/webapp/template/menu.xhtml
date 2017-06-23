@@ -1,7 +1,9 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html">
-
+	
+	<ui:param name="root" value="#{request.contextPath}" />
+	
 		<div class="static-sidebar-wrapper sidebar-default">
 			<div class="static-sidebar" style="top: 50px;">
 				<div class="sidebar">
@@ -27,45 +29,55 @@
 								<li><a href="index.html"><i class="fa fa-home"></i><span>Dashboard</span><span
 										class="badge badge-dark">1</span></a></li>
 								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-flask"></i><span>Amostra</span></a>
+										class="fa fa-code-fork"></i><span>Amostra</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterAmostra.jsf">Manter Amostra</a></li>
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterClasse.jsf">Manter Classe</a></li>
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterTipoEnsaio.jsf">Manter Tipo Ensaio</a></li>
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/amostra/manterStatusAmostra.jsf">Manter Status</a></li>
+										<li><a href="#{root}/paginas/amostra/manterAmostra.jsf">Manter Amostra</a></li>
+										<li><a href="#{root}/paginas/amostra/manterClasse.jsf">Manter Classe</a></li>
+										<li><a href="#{root}/paginas/amostra/manterTipoEnsaio.jsf">Manter Tipo Ensaio</a></li>
+										<li><a href="#{root}/paginas/amostra/manterStatusAmostra.jsf">Manter Status</a></li>
 									</ul></li>
 								<li class="hasChild"><a href="javascript:;"><i
 									class="fa fa-cogs"></i><span>Análise</span></a>
 								<ul class="acc-menu">
-									<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/analise/manterAnalise.jsf">Manter Análise</a></li>
+									<li><a href="#{root}/paginas/analise/manterAnalise.jsf">Manter Análise</a></li>
 								</ul></li>
 								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-cogs"></i><span>Laboratório</span></a>
+										class="fa fa-eyedropper"></i><span>Laboratório</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/laboratorio/manterLaboratorio.jsf">Manter Laboratório</a></li>
+										<li><a href="#{root}/paginas/laboratorio/manterLaboratorio.jsf">Manter Laboratório</a></li>
 									</ul></li>
 								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-random"></i><span>Equipamento</span></a>
+										class="fa fa-flask"></i><span>Produto</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/equipamento/manterEquipamento.jsf">Manter Equipamento</a></li>
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/equipamento/manterStatusEquipamento.jsf">Manter Status</a></li>
+										<li><a href="#{root}/paginas/produto/manterProduto.jsf">Manter Produto</a></li>
+									</ul></li>	
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-wrench"></i><span>Equipamento</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{root}/paginas/equipamento/manterEquipamento.jsf">Manter Equipamento</a></li>
+										<li><a href="#{root}/paginas/equipamento/manterStatusEquipamento.jsf">Manter Status</a></li>
 									</ul></li>
 								<li class="hasChild"><a href="javascript:;"><i
 										class="fa fa-pencil"></i><span>Devolução</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/devolucao/manterDevolucao.jsf">Manter Devolução</a></li>
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/devolucao/manterMotivoDevolucao.jsf">Manter Motivo Devolução</a></li>
+										<li><a href="#{root}/paginas/devolucao/manterDevolucao.jsf">Manter Devolução</a></li>
+										<li><a href="#{root}/paginas/devolucao/manterMotivoDevolucao.jsf">Manter Motivo Devolução</a></li>
 									</ul></li>
 								<li class="hasChild"><a href="javascript:;"><i
 										class="fa fa-table"></i><span>Tarefa</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/tarefa/manterTarefa.jsf">Manter Tarefa</a></li>
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/tarefa/manterStatusTarefa.jsf">Manter Status</a></li>
+										<li><a href="#{root}/paginas/tarefa/manterTarefa.jsf">Manter Tarefa</a></li>
+										<li><a href="#{root}/paginas/tarefa/manterStatusTarefa.jsf">Manter Status</a></li>
 									</ul></li>
 								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-table"></i><span>Usuário</span></a>
+										class="fa fa-users"></i><span>Usuário</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{facesContext.externalContext.request.contextPath}/paginas/usuario/manterUsuario.jsf">Manter Usuário</a></li>
+										<li><a href="#{root}/paginas/usuario/manterUsuario.jsf">Manter Usuário</a></li>
+									</ul></li>	
+								<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-sitemap"></i><span>Empresa</span></a>
+									<ul class="acc-menu">
+										<li><a href="#{root}/paginas/empresa/manterEmpresa.jsf">Manter Empresa</a></li>
 									</ul></li>	
 							</ul>		
 						</nav>

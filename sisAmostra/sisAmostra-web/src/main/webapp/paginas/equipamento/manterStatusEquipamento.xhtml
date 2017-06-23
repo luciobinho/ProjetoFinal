@@ -10,14 +10,14 @@
 				<div class="panel-heading">
 					<h2>MANTER - STATUS EQUIPAMENTO</h2>
 				</div>
-				<h:panelGroup id="formTabela"
-					rendered="#{not empty statusEquipamentoMB.listStatusEquipamentos}">
-					<h:messages autoUpdate="true" />
-					<h:panelGroup rendered="#{empty statusEquipamentoMB.listStatusEquipamentos and !statusEquipamentoMB.cadastrar and !statusEquipamentoMB.editar}">
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty statusEquipamentoMB.listStatusEquipamentos and !statusEquipamentoMB.cadastrar and !statusEquipamentoMB.editar}">
 						<div class="panel-heading">
 							<h3>Nenhum registro cadastrado!</h3>
 						</div>	
 					</h:panelGroup>
+				<h:panelGroup id="formTabela"
+					rendered="#{not empty statusEquipamentoMB.listStatusEquipamentos}">
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">
@@ -117,13 +117,16 @@
 								</div>
 							</div>
 						</div>
-
-						<div class="col-md-12">
-							<h:commandButton class="btn btn-primary pull-right h2"
-								value="Novo" action="#{statusEquipamentoMB.novo()}" />
-						</div>
 					</div>
 				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{!statusEquipamentoMB.cadastrar and !statusEquipamentoMB.editar}">
+					<div class="col-md-12">
+						<h:commandButton class="btn btn-primary pull-right h2" value="Novo"
+							action="#{statusEquipamentoMB.novo()}" />
+					</div>
+				</h:panelGroup>
+				
 				<!-- cadastro -->
 				<h:panelGroup id="formCadastro"
 					rendered="#{statusEquipamentoMB.cadastrar}">

@@ -51,11 +51,6 @@ public class DevolucaoAmostraMB {
 		
 		usuario = usuarioService.buscar(537);//TODO recuperar usuario logado
 		
-		if (listDevolucaoAmostras.isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Não existe Devolucao Amostra cadastrado!", ""));
-		}
-
 	}
 
 	private void carregarListas() {

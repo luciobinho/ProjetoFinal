@@ -91,12 +91,15 @@
 							</h:dataTable>
 						</div>
 					</div>
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{!laboratorioMB.cadastrar and !laboratorioMB.editar}">
 					<div class="col-md-12">
 						<h:commandButton class="btn btn-primary pull-right h2"
 							value="Novo" action="#{laboratorioMB.novo()}" />
 					</div>
-					<h:messages style="color:red;margin:8px;" />
-				</h:panelGroup>
+					
+				</h:panelGroup>	
 				<!-- cadastro -->
 				<h:panelGroup id="formCadastro"
 					rendered="#{laboratorioMB.cadastrar}">

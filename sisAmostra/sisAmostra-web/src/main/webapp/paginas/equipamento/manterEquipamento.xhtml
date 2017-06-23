@@ -10,14 +10,14 @@
 				<div class="panel-heading">
 					<h2>MANTER - EQUIPAMENTO</h2>
 				</div>
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty equipamentoMB.listaEquipamentos and !equipamentoMB.cadastrar and !equipamentoMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
 				<h:panelGroup id="formTabela"
 					rendered="#{not empty equipamentoMB.listaEquipamentos}">
-					<h:messages autoUpdate="true" />
-					<h:panelGroup rendered="#{empty equipamentoMB.listaEquipamentos and !equipamentoMB.cadastrar and !equipamentoMB.editar}">
-						<div class="panel-heading">
-							<h3>Nenhum registro cadastrado!</h3>
-						</div>	
-					</h:panelGroup>
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">
@@ -132,11 +132,15 @@
 						</div>
 					</div>
 					<br />
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{!equipamentoMB.cadastrar and !equipamentoMB.editar}">
 					<div class="col-md-12">
 						<h:commandButton class="btn btn-primary pull-right h2"
 							value="Novo" action="#{equipamentoMB.novo()}" />
 					</div>
-				</h:panelGroup>
+				</h:panelGroup>	
+					
 				<h:panelGroup id="formCadastrar"
 					rendered="#{equipamentoMB.cadastrar}">
 					<div class="panel panel-default">
