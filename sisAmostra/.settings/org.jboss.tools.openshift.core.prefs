@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+org.jboss.tools.openshift.Connection=https\://luciobinho@console.starter-us-west-2.openshift.com
+org.jboss.tools.openshift.DeployProject=sisAmostra
+org.jboss.tools.openshift.Service=sisamostra@postgresql
+org.jboss.tools.openshift.SourcePath=${workspace_loc\:/sisAmostra}

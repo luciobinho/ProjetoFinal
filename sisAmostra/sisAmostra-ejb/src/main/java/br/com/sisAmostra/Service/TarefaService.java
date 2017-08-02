@@ -12,31 +12,31 @@ import br.com.sisAmostra.Entity.Tarefa;
 
 @Stateless
 public class TarefaService implements Serializable {
-	
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 6874679541493339991L;
-	
-	@PersistenceContext(name="sisAmostra")
+
+	@PersistenceContext(name = "sisAmostra")
 	protected EntityManager entityManager;
 
 	public Tarefa inserirOuAtualizar(Tarefa tarefa) {
-		
+
 		entityManager.merge(tarefa);
-		
+
 		return tarefa;
 	}
 
 	public Tarefa buscar(Integer id) {
 		return entityManager.find(Tarefa.class, id);
 	}
-	
-	public List<Tarefa> findAll(){		
+
+	public List<Tarefa> findAll() {
 		TypedQuery<Tarefa> query = entityManager.createNamedQuery("Tarefa.findAll", Tarefa.class);
-		
-        return query.getResultList();
- 
+
+		return query.getResultList();
+
 	}
 
 	public Tarefa atualizar(Tarefa tarefa) {
@@ -47,7 +47,12 @@ public class TarefaService implements Serializable {
 		tarefa = entityManager.merge(tarefa);
 		entityManager.remove(tarefa);
 	}
-}	
 
-
-
+	public List<Tarefa> recuperarTarefasFuncionario(Integer idUsuario) {
+		TypedQuery<Tarefa> query = entityManager.createNamedQuery("Tarefa.recuperarTarefasPorFuncionario", Tarefa.class);
+		
+		query.setParameter("idUsuaio", idUsuario);
+		
+		return query.getResultList();
+	}
+}

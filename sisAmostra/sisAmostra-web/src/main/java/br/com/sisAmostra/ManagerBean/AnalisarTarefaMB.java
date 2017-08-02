@@ -19,12 +19,12 @@ import br.com.sisAmostra.Service.StatusTarefaService;
 import br.com.sisAmostra.Service.TarefaService;
 import br.com.sisAmostra.Service.UsuarioService;
 
-@ManagedBean(name = "tarefaMB")
+@ManagedBean(name = "analisarTarefaMB")
 @ViewScoped
-public class TarefaMB {
+public class AnalisarTarefaMB {
 
 	private Tarefa tarefa = new Tarefa();
-	private List<Tarefa> listTarefas;
+	private List<Tarefa> listTarefasFuncionario;
 	private List<StatusTarefa> listStatusTarefas;
 	
 	private List<SelectItem> listaStatus;
@@ -45,13 +45,17 @@ public class TarefaMB {
 	@Inject
 	UsuarioService usuarioService;
 	
+	Usuario usuario = new Usuario();
+
 	@PostConstruct
 	public void init() {
 		carregarListas();
+		
+		usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	}
 
 	private void carregarListas() {
-		listTarefas = tarefaService.findAll();
+		listTarefasFuncionario = tarefaService.recuperarTarefasFuncionario(usuario.getIdUsuario());
 		popularComboFuncionario();
 		popularComboStatus();
 	}
@@ -108,7 +112,7 @@ public class TarefaMB {
 	
 	public void novo(){
 		cadastrar = Boolean.TRUE;
-		listTarefas = new ArrayList<>();
+		listTarefasFuncionario = new ArrayList<>();
 	}
 	
 	public void alterar(){
@@ -117,7 +121,7 @@ public class TarefaMB {
 		idFuncionario = tarefa.getUsuario().getIdUsuario().longValue();
 		idStatus = tarefa.getStatusTarefa().getIdStatus().longValue();
 		editar = Boolean.TRUE;
-		listTarefas = new ArrayList<>();
+		listTarefasFuncionario = new ArrayList<>();
 	}
 	
 	public void cancelar(){
@@ -167,14 +171,6 @@ public class TarefaMB {
 
 	public void setTarefa(Tarefa tarefa) {
 		this.tarefa = tarefa;
-	}
-
-	public List<Tarefa> getListTarefas() {
-		return listTarefas;
-	}
-
-	public void setListTarefas(List<Tarefa> listTarefas) {
-		this.listTarefas = listTarefas;
 	}
 
 	public boolean isCadastrar() {
@@ -231,6 +227,14 @@ public class TarefaMB {
 
 	public void setIdStatus(Long idStatus) {
 		this.idStatus = idStatus;
+	}
+
+	public List<Tarefa> getListTarefasFuncionario() {
+		return listTarefasFuncionario;
+	}
+
+	public void setListTarefasFuncionario(List<Tarefa> listTarefasFuncionario) {
+		this.listTarefasFuncionario = listTarefasFuncionario;
 	}
 
 }

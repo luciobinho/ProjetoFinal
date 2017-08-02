@@ -9,16 +9,16 @@
 		<div class="panel panel-default">
 			<h:form class="form-horizontal tabular-form" id="formPrincipal">
 				<div class="panel-heading">
-					<h2>MANTER - TAREFA</h2>
+					<h2>ANALISAR - TAREFA</h2>
 				</div>
 				<h:messages autoUpdate="true" />
-				<h:panelGroup rendered="#{empty tarefaMB.listTarefas and !tarefaMB.cadastrar and !tarefaMB.editar}">
+				<h:panelGroup rendered="#{empty analisarTarefaMB.listTarefasFuncionarios and !analisarTarefaMB.cadastrar and !analisarTarefaMB.editar}">
 					<div class="panel-heading">
 						<h3>Nenhum registro cadastrado!</h3>
 					</div>	
 				</h:panelGroup>	
 				<h:panelGroup id="formTabela"
-					rendered="#{not empty tarefaMB.listTarefas}">
+					rendered="#{not empty analisarTarefaMB.listTarefasFuncionario}">
 					<div class="panel-body panel-no-padding">
 						<div id="example_wrapper"
 							class="dataTables_wrapper form-inline no-footer">
@@ -30,7 +30,7 @@
 								class="table table-striped table-bordered dataTable no-footer"
 								cellspacing="0" width="100%" role="grid"
 								aria-describedby="example_info" style="width: 100%;"
-								value="#{tarefaMB.listTarefas}" var="item" border="1">
+								value="#{analisarTarefaMB.listTarefasFuncionario}" var="item" border="1">
 								<h:column>
 									<f:facet name="header" class="sorting_asc" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
@@ -105,17 +105,17 @@
 										<h:outputText value="Ações" />
 									</f:facet>
 									<h:commandButton class="btn btn-warning btn-xs"
-										action="#{tarefaMB.alterar()}" value="Editar">
+										action="#{analisarTarefaMB.alterar()}" value="Editar">
 										<f:setPropertyActionListener value="#{item}"
-											target="#{tarefaMB.tarefa}" />
+											target="#{analisarTarefaMB.tarefa}" />
 									</h:commandButton>
 									<h:commandButton class="btn btn-danger btn-xs"
-										action="#{tarefaMB.deletar()}" data-toggle="modal"
+										action="#{analisarTarefaMB.deletar()}" data-toggle="modal"
 										value="Excluir" data-target="#delete-modal"
 										onclick="$('#modalExcluir').modal('show');" immediate="true">
 										<f:ajax execute="@this" render=":myForm" />
 										<f:setPropertyActionListener value="#{item}"
-											target="#{tarefaMB.tarefa}" />
+											target="#{analisarTarefaMB.tarefa}" />
 									</h:commandButton>
 								</h:column>
 							</h:dataTable>
@@ -124,7 +124,7 @@
 				</h:panelGroup>
 
 				<!-- cadastro -->
-				<h:panelGroup id="formCadastro" rendered="#{tarefaMB.cadastrar}">
+				<h:panelGroup id="formCadastro" rendered="#{analisarTarefaMB.cadastrar}">
 					<div class="static-content">
 						<div class="page-content">
 							<div class="page-tabs">
@@ -149,7 +149,7 @@
 																<h:inputText id="descricao" required="true"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{tarefaMB.tarefa.descricao}" />
+																	value="#{analisarTarefaMB.tarefa.descricao}" />
 															</div>
 														</div>
 														<div class="form-group">
@@ -158,18 +158,18 @@
 																<h:inputTextarea id="obs" required="true"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{tarefaMB.tarefa.observacao}" />
+																	value="#{analisarTarefaMB.tarefa.observacao}" />
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Funcionário</label>
 															<div class="col-sm-8 tabular-border">
 																<h:selectOneMenu class="form-control"
-																	value="#{tarefaMB.idFuncionario}">
+																	value="#{analisarTarefaMB.idFuncionario}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
 																	<f:selectItems class="form-control"
-																		value="#{tarefaMB.listaFuncionario}" />
+																		value="#{analisarTarefaMB.listaFuncionario}" />
 																</h:selectOneMenu>
 															</div>
 														</div>
@@ -177,32 +177,32 @@
 															<label for="" class="control-label col-sm-2">Status</label>
 															<div class="col-sm-8 tabular-border">
 																<h:selectOneMenu class="form-control"
-																	value="#{tarefaMB.idStatus}">
+																	value="#{analisarTarefaMB.idStatus}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
 																	<f:selectItems class="form-control"
-																		value="#{tarefaMB.listaStatus}" />
+																		value="#{analisarTarefaMB.listaStatus}" />
 																</h:selectOneMenu>
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Data de Início</label>
 															<div class="date col-sm-4 tabular-border">
-																<p:calendar id="dtInicioCad" value="#{tarefaMB.tarefa.dtInicioBean}" pattern="dd/MM/yyyy" />
+																<p:calendar id="dtInicioCad" value="#{analisarTarefaMB.tarefa.dtInicioBean}" pattern="dd/MM/yyyy" />
 															</div>
 															<label for="" class="control-label col-sm-2">Data de Final</label>
 															<div class="date col-sm-4 tabular-border" >
-																<p:calendar id="dtFimCad" value="#{tarefaMB.tarefa.dtPrazoBean}" pattern="dd/MM/yyyy" />
+																<p:calendar id="dtFimCad" value="#{analisarTarefaMB.tarefa.dtPrazoBean}" pattern="dd/MM/yyyy" />
 															</div>
 														</div>
 														
 														<div id="actions" class="row">
 															<div class="col-md-12 tabular-border">
 																<h:commandButton value="Salvar"
-																	action="#{tarefaMB.salvar()}"
+																	action="#{analisarTarefaMB.salvar()}"
 																	class="btn btn-primary pull-right" />
 																<h:commandButton value="Cancelar"
-																	action="#{tarefaMB.cancelar()}" immediate="true"
+																	action="#{analisarTarefaMB.cancelar()}" immediate="true"
 																	class="btn btn-default pull-right" />
 															</div>
 														</div>
@@ -219,7 +219,7 @@
 					</div>
 				</h:panelGroup>
 				<!-- alteração -->
-				<h:panelGroup id="formAlteracao" rendered="#{tarefaMB.editar}">
+				<h:panelGroup id="formAlteracao" rendered="#{analisarTarefaMB.editar}">
 					<div class="static-content">
 						<div class="page-content">
 							<div class="page-tabs">
@@ -243,7 +243,7 @@
 															<div class="col-sm-8 tabular-border">
 																<h:outputText id="id"
 																	class="form-control"
-																	value="#{tarefaMB.tarefa.idTarefa}" />
+																	value="#{analisarTarefaMB.tarefa.idTarefa}" />
 															</div>
 														</div>
 														<div class="form-group">
@@ -252,7 +252,7 @@
 																<h:inputText id="descricao"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{tarefaMB.tarefa.descricao}" />
+																	value="#{analisarTarefaMB.tarefa.descricao}" />
 															</div>
 														</div>
 														<div class="form-group">
@@ -261,18 +261,18 @@
 																<h:inputTextarea id="obs" required="true"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{tarefaMB.tarefa.observacao}" />
+																	value="#{analisarTarefaMB.tarefa.observacao}" />
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Funcionário</label>
 															<div class="col-sm-8 tabular-border">
 																<h:selectOneMenu class="form-control"
-																	value="#{tarefaMB.idFuncionario}">
+																	value="#{analisarTarefaMB.idFuncionario}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
 																	<f:selectItems class="form-control"
-																		value="#{tarefaMB.listaFuncionario}" />
+																		value="#{analisarTarefaMB.listaFuncionario}" />
 																</h:selectOneMenu>
 															</div>
 														</div>
@@ -280,32 +280,32 @@
 															<label for="" class="control-label col-sm-2">Status</label>
 															<div class="col-sm-8 tabular-border">
 																<h:selectOneMenu class="form-control"
-																	value="#{tarefaMB.idStatus}">
+																	value="#{analisarTarefaMB.idStatus}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
 																	<f:selectItems class="form-control"
-																		value="#{tarefaMB.listaStatus}" />
+																		value="#{analisarTarefaMB.listaStatus}" />
 																</h:selectOneMenu>
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Data de Início</label>
 															<div class="date col-sm-4 tabular-border">
-																<p:calendar id="dtInicioAlt" value="#{tarefaMB.tarefa.dtInicioBean}" pattern="dd/MM/yyyy" />
+																<p:calendar id="dtInicioAlt" value="#{analisarTarefaMB.tarefa.dtInicioBean}" pattern="dd/MM/yyyy" />
 															</div>
 															<label for="" class="control-label col-sm-2">Data de Final</label>
 															<div class="date col-sm-4 tabular-border">
-																<p:calendar id="dtFimAlt" value="#{tarefaMB.tarefa.dtPrazoBean}" pattern="dd/MM/yyyy" />
+																<p:calendar id="dtFimAlt" value="#{analisarTarefaMB.tarefa.dtPrazoBean}" pattern="dd/MM/yyyy" />
 															</div>
 														</div>
 														
 														<div id="actions" class="row">
 															<div class="col-md-12 tabular-border">
 																<h:commandButton value="Salvar"
-																	action="#{tarefaMB.salvar()}"
+																	action="#{analisarTarefaMB.salvar()}"
 																	class="btn btn-primary pull-right" />
 																<h:commandButton value="Cancelar"
-																	action="#{tarefaMB.cancelar()}" immediate="true"
+																	action="#{analisarTarefaMB.cancelar()}" immediate="true"
 																	class="btn btn-default pull-right" />
 															</div>
 														</div>
@@ -322,10 +322,10 @@
 					</div>
 				</h:panelGroup>
 				
-				<h:panelGroup rendered="#{!tarefaMB.cadastrar and !tarefaMB.editar}">
+				<h:panelGroup rendered="#{!analisarTarefaMB.cadastrar and !analisarTarefaMB.editar}">
 					<div class="col-md-12">
 						<h:commandButton class="btn btn-primary pull-right h2" value="Novo"
-							action="#{tarefaMB.novo()}" />
+							action="#{analisarTarefaMB.novo()}" />
 					</div>
 				</h:panelGroup>
 				
@@ -344,7 +344,7 @@
 							<div class="modal-body">Deseja realmente excluir este item?</div>
 							<div class="modal-footer">
 								<h:commandLink value="Sim" type="button" class="btn btn-primary"
-									action="#{tarefaMB.deletar()}"
+									action="#{analisarTarefaMB.deletar()}"
 									onclick="$('#modalExcluir').modal('hide');">
 								</h:commandLink>
 								<button type="button" class="btn btn-default"

@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Tarefa")
 @NamedQueries({
-	@NamedQuery(name = "Tarefa.findAll", query = "SELECT T FROM Tarefa T")
+	@NamedQuery(name = "Tarefa.findAll", query = "SELECT T FROM Tarefa T"),
+	@NamedQuery(name = "Tarefa.findAllFunc", query = "SELECT T FROM Tarefa T WHERE T.idUsuario = :idUsuario"),
 })
 
 public class Tarefa {
