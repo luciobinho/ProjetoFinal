@@ -12,7 +12,7 @@ import javax.persistence.Table;
 @Table(name="Usuario")
 @NamedQueries({
 	@NamedQuery(name = "Usuario.findAll", query = "SELECT U FROM Usuario U"),
-	@NamedQuery(name = "Usuario.findLogin", query = "SELECT U FROM Usuario U WHERE U.login = ?0")
+	@NamedQuery(name = "Usuario.findLogin", query = "SELECT U FROM Usuario U WHERE upper(U.login) = ?0")
 })
 
 public class Usuario {
