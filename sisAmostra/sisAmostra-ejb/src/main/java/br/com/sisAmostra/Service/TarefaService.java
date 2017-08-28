@@ -49,9 +49,9 @@ public class TarefaService implements Serializable {
 	}
 
 	public List<Tarefa> recuperarTarefasFuncionario(Integer idUsuario) {
-		TypedQuery<Tarefa> query = entityManager.createNamedQuery("Tarefa.recuperarTarefasPorFuncionario", Tarefa.class);
+		TypedQuery<Tarefa> query = entityManager.createNamedQuery("Tarefa.findAllFunc", Tarefa.class);
 		
-		query.setParameter("idUsuaio", idUsuario);
+		query.setParameter("idUsuario", idUsuario);
 		
 		return query.getResultList();
 	}

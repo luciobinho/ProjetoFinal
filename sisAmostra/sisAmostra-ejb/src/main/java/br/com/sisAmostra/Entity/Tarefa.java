@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -18,7 +19,7 @@ import javax.persistence.Table;
 @Table(name="Tarefa")
 @NamedQueries({
 	@NamedQuery(name = "Tarefa.findAll", query = "SELECT T FROM Tarefa T"),
-	@NamedQuery(name = "Tarefa.findAllFunc", query = "SELECT T FROM Tarefa T WHERE T.idUsuario = :idUsuario")
+	@NamedQuery(name = "Tarefa.findAllFunc", query = "SELECT T FROM Tarefa T WHERE T.usuario.idUsuario = :idUsuario")
 })
 
 public class Tarefa {
@@ -44,7 +45,7 @@ public class Tarefa {
 	@JoinColumn(name="idStatus")
 	private StatusTarefa statusTarefa;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
 	
