@@ -28,7 +28,7 @@ public class EmpresaService implements Serializable {
 		return empresa;
 	}
 
-	public Empresa buscar(Integer id) {
+	public Empresa buscar(Long id) {
 		return entityManager.find(Empresa.class, id);
 	}
 	

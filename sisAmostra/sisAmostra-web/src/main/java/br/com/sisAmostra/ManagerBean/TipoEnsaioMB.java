@@ -1,7 +1,6 @@
 package br.com.sisAmostra.ManagerBean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -40,8 +39,6 @@ public class TipoEnsaioMB {
 	public void salvar() {
 		
 		try {
-			tipoEnsaio.setDtUltAlteracao(Calendar.getInstance());
-			tipoEnsaio.setUsuUltAlteracao("123456");
 			tipoEnsaioService.inserirOuAtualizar(tipoEnsaio);
 			
 			tipoEnsaio = new TipoEnsaio();
@@ -50,7 +47,7 @@ public class TipoEnsaioMB {
 			
 			FacesContext.getCurrentInstance().addMessage("sucesso", new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de Ensaio cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 
@@ -70,7 +67,7 @@ public class TipoEnsaioMB {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Tipo de Ensaio deletada com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	

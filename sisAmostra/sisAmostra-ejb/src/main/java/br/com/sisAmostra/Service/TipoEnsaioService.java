@@ -28,7 +28,7 @@ public class TipoEnsaioService implements Serializable {
 		return tipoEnsaio;
 	}
 
-	public TipoEnsaio buscar(Integer id) {
+	public TipoEnsaio buscar(Long id) {
 		return entityManager.find(TipoEnsaio.class, id);
 	}
 	

@@ -2,11 +2,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
 	<ui:define name="conteudo">
 		<div class="panel panel-default">
-			<h:form id="formPrincipal">
+			<h:form class="form-horizontal tabular-form" id="formPrincipal">
 				<div class="panel-heading">
 					<h2>MANTER - STATUS AMOSTRA</h2>
 				</div>
@@ -42,32 +43,14 @@
 								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
-										style="width: 212px;">
+										style="width: 100px;">
 										<h:outputText value="Descrição" />
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
-										value="#{item.descricao}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header" class="sorting_asc" tabindex="0"
-										aria-controls="example" rowspan="1" colspan="1"
-										aria-sort="ascending" style="width: 196px;">
-										<h:outputText value="Usuário" />
-									</f:facet>
-									<h:outputText class="gradeA odd" role="row"
-										value="#{item.usuUltAlteracao}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header" class="sorting" tabindex="0"
-										aria-controls="example" rowspan="1" colspan="1"
-										style="width: 100px;">
-										<h:outputText value="Data de Alteração" />
-									</f:facet>
-									<h:outputText class="gradeA odd" role="row"
-										value="#{item.dtUltAlteracao.time}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
+										value="#{item.descricao}">
 									</h:outputText>
 								</h:column>
+								
 								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
@@ -79,144 +62,164 @@
 										<f:setPropertyActionListener value="#{item}"
 											target="#{statusAmostraMB.statusAmostra}" />
 									</h:commandButton>
-									<h:commandLink value="Excluir" class="btn btn-danger btn-xs"
-										data-toggle="modal"
+									<h:commandButton class="btn btn-danger btn-xs"
+										action="#{statusAmostraMB.deletar()}" data-toggle="modal"
+										value="Excluir" data-target="#delete-modal"
 										onclick="$('#modalExcluir').modal('show');" immediate="true">
 										<f:ajax execute="@this" render=":myForm" />
 										<f:setPropertyActionListener value="#{item}"
 											target="#{statusAmostraMB.statusAmostra}" />
-									</h:commandLink>
+									</h:commandButton>
 								</h:column>
 							</h:dataTable>
 						</div>
-
-						<!-- Modal Excluir -->
-						<div class="modal fade" id="modalExcluir" tabindex="-1"
-							role="dialog" aria-labelledby="modalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Fechar">
-											<span aria-hidden="true"></span>
-										</button>
-										<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
-									</div>
-									<div class="modal-body">Deseja realmente excluir este
-										item?</div>
-									<div class="modal-footer">
-										<h:commandLink value="Sim" type="button"
-											class="btn btn-primary" action="#{statusAmostraMB.deletar()}"
-											onclick="$('#modalExcluir').modal('hide');">
-										</h:commandLink>
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Não</button>
-									</div>
-								</div>
-							</div>
-						</div>
 					</div>
-					<br />
 				</h:panelGroup>
 
+				<!-- cadastro -->
+				<h:panelGroup id="formCadastro" rendered="#{statusAmostraMB.cadastrar}">
+					<div class="static-content">
+						<div class="page-content">
+							<div class="page-tabs">
+								<ul class="nav nav-tabs">
+									<li class="dropdown pull-right tabdrop hide"><a
+										class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+											class="fa fa-angle-down"></i> </a>
+										<ul class="dropdown-menu"></ul></li>
+									<li class="active"><a data-toggle="tab" href="#details">Cadastrar</a></li>
+								</ul>
+							</div>
+							<div class="container-fluid">
+								<div class="tab-content">
+									<div class="tab-pane active" id="details">
+										<div class="panel">
+											<div class="panel-body">
+												<div class="tab-pane active" id="details">
+													<h:form action="" class="form-horizontal tabular-form">
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Descrição</label>
+															<div class="col-sm-8 tabular-border">
+																<h:inputText id="codScad" required="true"
+																	class="form-control"
+																	onkeyup="this.value=this.value.toUpperCase();"
+																	value="#{statusAmostraMB.statusAmostra.descricao}" />
+															</div>
+														</div>
+														
+														<div id="actions" class="row">
+															<div class="col-md-12 tabular-border">
+																<h:commandButton value="Salvar"
+																	action="#{statusAmostraMB.salvar()}"
+																	class="btn btn-primary pull-right" />
+																<h:commandButton value="Cancelar"
+																	action="#{statusAmostraMB.cancelar()}" immediate="true"
+																	class="btn btn-default pull-right" />
+															</div>
+														</div>
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- .container-fluid -->
+							</div>
+							<!-- #page-content -->
+						</div>
+					</div>
+				</h:panelGroup>
+				<!-- alteração -->
+				<h:panelGroup id="formAlteracao" rendered="#{statusAmostraMB.editar}">
+					<div class="static-content">
+						<div class="page-content">
+							<div class="page-tabs">
+								<ul class="nav nav-tabs">
+									<li class="dropdown pull-right tabdrop hide"><a
+										class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+											class="fa fa-angle-down"></i> </a>
+										<ul class="dropdown-menu"></ul></li>
+									<li class="active"><a data-toggle="tab" href="#details">Alterar</a></li>
+								</ul>
+							</div>
+							<div class="container-fluid">
+								<div class="tab-content">
+									<div class="tab-pane active" id="details">
+										<div class="panel">
+											<div class="panel-body">
+												<div class="tab-pane active" id="details">
+													<h:form action="" class="form-horizontal tabular-form">
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">ID</label>
+															<div class="col-sm-8 tabular-border">
+																<h:outputText id="id"
+																	class="form-control"
+																	value="#{statusAmostraMB.statusAmostra.idStatus}" />
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Descrição</label>
+															<div class="col-sm-8 tabular-border">
+																<h:inputText id="codScad" required="true"
+																	class="form-control"
+																	onkeyup="this.value=this.value.toUpperCase();"
+																	value="#{statusAmostraMB.statusAmostra.descricao}" />
+															</div>
+														</div>
+														
+														<div id="actions" class="row">
+															<div class="col-md-12 tabular-border">
+																<h:commandButton value="Salvar"
+																	action="#{statusAmostraMB.salvar()}"
+																	class="btn btn-primary pull-right" />
+																<h:commandButton value="Cancelar"
+																	action="#{statusAmostraMB.cancelar()}" immediate="true"
+																	class="btn btn-default pull-right" />
+															</div>
+														</div>
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- .container-fluid -->
+							</div>
+							<!-- #page-content -->
+						</div>
+					</div>
+				</h:panelGroup>
+				
 				<h:panelGroup rendered="#{!statusAmostraMB.cadastrar and !statusAmostraMB.editar}">
 					<div class="col-md-12">
-						<h:commandLink value="Novo" type="button"
-							class="btn btn-primary pull-right h2"
+						<h:commandButton class="btn btn-primary pull-right h2" value="Novo"
 							action="#{statusAmostraMB.novo()}" />
 					</div>
-				</h:panelGroup>	
-					
-				<h:panelGroup id="formCadastrar"
-					rendered="#{statusAmostraMB.cadastrar}">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<h2>CADASTRAR</h2>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label for="campo1">Descrição:</label>
-									<h:inputText id="descricao" required="true"
-										requiredMessage="Descrição Obrigatória." class="form-control"
-										onkeyup="this.value=this.value.toUpperCase();"
-										value="#{statusAmostraMB.statusAmostra.descricao}" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<h:commandLink value="Salvar" type="button"
-										class="btn btn-primary" action="#{statusAmostraMB.salvar()}" />
-									<h:commandButton value="Cancelar"
-										action="#{statusAmostraMB.cancelar()}" class="btn btn-default" />
-								</div>
-							</div>
-							<h:messages style="color:red;margin:8px;" />
-						</div>
-					</div>
 				</h:panelGroup>
-				<h:panelGroup id="formAlterar" rendered="#{statusAmostraMB.editar}">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<h2>ALTERAR</h2>
+				
+				<!-- Modal Excluir -->
+				<div class="modal fade" id="modalExcluir" tabindex="-1"
+					role="dialog" aria-labelledby="modalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Fechar">
+									<span aria-hidden="true"></span>
+								</button>
+								<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
 							</div>
-							<h:dataTable
-								class="table table-striped table-bordered dataTable no-footer"
-								cellspacing="0" width="100%" role="grid"
-								aria-describedby="example_info" style="width: 100%;"
-								value="#{statusAmostraMB.statusAmostra}" var="item" border="1">
-								<h:column>
-									<f:facet name="header" class="sorting_asc" tabindex="0"
-										aria-controls="example" rowspan="1" colspan="1"
-										aria-sort="ascending" style="width: 196px;">
-										<h:outputText value="Código" />
-									</f:facet>
-									<h:outputText class="gradeA odd" role="row"
-										value="#{statusAmostraMB.statusAmostra.idStatus}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header" class="sorting_asc" tabindex="0"
-										aria-controls="example" rowspan="1" colspan="1"
-										aria-sort="ascending" style="width: 196px;">
-										<h:outputText value="Usuário" />
-									</f:facet>
-									<h:outputText class="gradeA odd" role="row"
-										value="#{statusAmostraMB.statusAmostra.usuUltAlteracao}" />
-								</h:column>
-								<h:column>
-									<f:facet name="header" class="sorting" tabindex="0"
-										aria-controls="example" rowspan="1" colspan="1"
-										style="width: 100px;">
-										<h:outputText value="Data de Alteração" />
-									</f:facet>
-									<h:outputText class="gradeA odd" role="row"
-										value="#{statusAmostraMB.statusAmostra.dtUltAlteracao.time}">
-										<f:convertDateTime pattern="dd/MM/yyyy" />
-									</h:outputText>
-								</h:column>
-							</h:dataTable>
-							<div class="row">
-								<div class="form-group col-md-12">
-									<label for="campo1">Descrição:</label>
-									<h:inputText id="descricaoAlt" required="true"
-										class="form-control"
-										onkeyup="this.value=this.value.toUpperCase();"
-										value="#{statusAmostraMB.statusAmostra.descricao}" />
-								</div>
-							</div>
-
-							<div id="actions" class="row">
-								<div class="col-md-12">
-									<h:commandButton value="Salvar"
-										action="#{statusAmostraMB.salvar()}" class="btn btn-primary" />
-									<h:commandButton value="Cancelar"
-										action="#{statusAmostraMB.cancelar()}" class="btn btn-default" />
-								</div>
+							<div class="modal-body">Deseja realmente excluir este item?</div>
+							<div class="modal-footer">
+								<h:commandLink value="Sim" type="button" class="btn btn-primary"
+									action="#{statusAmostraMB.deletar()}"
+									onclick="$('#modalExcluir').modal('hide');">
+								</h:commandLink>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Não</button>
 							</div>
 						</div>
 					</div>
-				</h:panelGroup>
+				</div>
 			</h:form>
 		</div>
 	</ui:define>

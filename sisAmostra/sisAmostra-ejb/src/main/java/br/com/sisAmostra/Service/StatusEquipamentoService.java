@@ -28,7 +28,7 @@ public class StatusEquipamentoService implements Serializable {
 		return statusEquipamento;
 	}
 
-	public StatusEquipamento buscar(Integer id) {
+	public StatusEquipamento buscar(Long id) {
 		return entityManager.find(StatusEquipamento.class, id);
 	}
 	
@@ -36,9 +36,14 @@ public class StatusEquipamentoService implements Serializable {
 		TypedQuery<StatusEquipamento> query = entityManager.createNamedQuery("StatusEquipamento.findAll", StatusEquipamento.class);
 		
         return query.getResultList();
- 
 	}
 
+	public Long sequence(){		
+		TypedQuery<Long> query = entityManager.createNamedQuery("StatusEquipamento.sequence", Long.class);
+		
+        return query.getSingleResult();
+	}
+	
 	public StatusEquipamento atualizar(StatusEquipamento statusEquipamento) {
 		return entityManager.merge(statusEquipamento);
 	}

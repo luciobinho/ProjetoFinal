@@ -1,7 +1,5 @@
 package br.com.sisAmostra.Entity;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +19,7 @@ public class ClasseAmostra {
 	@Id
 	@Column
 	@GeneratedValue
-	private Integer idClasse;
+	private Long idClasse;
 	
 	@Column
 	private String cdClasse;
@@ -29,17 +27,11 @@ public class ClasseAmostra {
 	@Column
 	private String descricao;
 	
-	@Column
-	private Calendar dtUltAlteracao;
-	
-	@Column
-	private String usuUltAlteracao;	
-
-	public Integer getIdClasse() {
+	public Long getIdClasse() {
 		return idClasse;
 	}
 
-	public void setIdClasse(Integer idClasse) {
+	public void setIdClasse(Long idClasse) {
 		this.idClasse = idClasse;
 	}
 
@@ -59,21 +51,4 @@ public class ClasseAmostra {
 		this.descricao = descricao;
 	}
 
-	public Calendar getDtUltAlteracao() {
-		return dtUltAlteracao;
-	}
-
-	public void setDtUltAlteracao(Calendar dtUltAlteracao) {
-		this.dtUltAlteracao = dtUltAlteracao;
-	}
-
-	public String getUsuUltAlteracao() {
-		return usuUltAlteracao;
-	}
-
-	public void setUsuUltAlteracao(String usuUltAlteracao) {
-		this.usuUltAlteracao = usuUltAlteracao;
-	}
-	
-	
 }

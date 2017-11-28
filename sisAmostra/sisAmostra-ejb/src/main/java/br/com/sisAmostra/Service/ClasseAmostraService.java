@@ -28,7 +28,7 @@ public class ClasseAmostraService implements Serializable {
 		return classeAmostra;
 	}
 
-	public ClasseAmostra buscar(Integer id) {
+	public ClasseAmostra buscar(Long id) {
 		return entityManager.find(ClasseAmostra.class, id);
 	}
 	

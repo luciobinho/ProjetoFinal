@@ -28,7 +28,7 @@ public class MotivoDevolucaoService implements Serializable {
 		return motivoDevolucao;
 	}
 
-	public MotivoDevolucao buscar(Integer id) {
+	public MotivoDevolucao buscar(Long id) {
 		return entityManager.find(MotivoDevolucao.class, id);
 	}
 	

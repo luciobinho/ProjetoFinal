@@ -1,7 +1,5 @@
 package br.com.sisAmostra.Entity;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,22 +19,16 @@ public class Laboratorio {
 	@Id
 	@Column
 	@GeneratedValue
-	private Integer idLaboratorio;
+	private Long idLaboratorio;
 	
 	@Column
 	private String descricao;
 	
-	@Column
-	private Calendar dtUltAlteracao;
-	
-	@Column
-	private String usuUltAlteracao;	
-
-	public Integer getIdLaboratorio() {
+	public Long getIdLaboratorio() {
 		return idLaboratorio;
 	}
 
-	public void setIdLaboratorio(Integer idLaboratorio) {
+	public void setIdLaboratorio(Long idLaboratorio) {
 		this.idLaboratorio = idLaboratorio;
 	}
 
@@ -48,21 +40,4 @@ public class Laboratorio {
 		this.descricao = descricao;
 	}
 
-	public Calendar getDtUltAlteracao() {
-		return dtUltAlteracao;
-	}
-
-	public void setDtUltAlteracao(Calendar dtUltAlteracao) {
-		this.dtUltAlteracao = dtUltAlteracao;
-	}
-
-	public String getUsuUltAlteracao() {
-		return usuUltAlteracao;
-	}
-
-	public void setUsuUltAlteracao(String usuUltAlteracao) {
-		this.usuUltAlteracao = usuUltAlteracao;
-	}
-	
-	
 }

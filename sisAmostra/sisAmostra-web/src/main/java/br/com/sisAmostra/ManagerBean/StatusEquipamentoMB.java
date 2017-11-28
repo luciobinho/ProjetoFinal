@@ -1,11 +1,9 @@
 package br.com.sisAmostra.ManagerBean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.EJBException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
@@ -41,8 +39,9 @@ public class StatusEquipamentoMB {
 	public void salvar() {
 		
 		try {
-			statusEquipamento.setDtUltAlteracao(Calendar.getInstance());
-			statusEquipamento.setUsuUltAlteracao("123456");
+			if(statusEquipamento.getIdStatus() == null){
+				statusEquipamento.setIdStatus(statusEquipamentoService.sequence());
+			}	
 			statusEquipamentoService.inserirOuAtualizar(statusEquipamento);
 			
 			statusEquipamento = new StatusEquipamento();
@@ -51,7 +50,7 @@ public class StatusEquipamentoMB {
 			
 			FacesContext.getCurrentInstance().addMessage("sucesso", new FacesMessage(FacesMessage.SEVERITY_INFO, "Status Equipamento cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 
@@ -71,9 +70,7 @@ public class StatusEquipamentoMB {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Status Equipamento deletada com sucesso!", ""));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null,
-					new FacesMessage(FacesMessage.SEVERITY_INFO, "Erro ao excluir o Equipamento - " + e.getMessage(), ""));
-			throw new EJBException(e);
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	

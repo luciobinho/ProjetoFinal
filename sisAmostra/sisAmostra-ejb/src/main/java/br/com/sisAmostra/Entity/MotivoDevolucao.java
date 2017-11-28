@@ -19,16 +19,16 @@ public class MotivoDevolucao {
 	@Id
 	@Column
 	@GeneratedValue
-	private Integer idMotivoDevolucao;
+	private Long idMotivoDevolucao;
 	
 	@Column
 	private String descricao;
 	
-	public Integer getIdMotivoDevolucao() {
+	public Long getIdMotivoDevolucao() {
 		return idMotivoDevolucao;
 	}
 
-	public void setIdMotivoDevolucao(Integer idMotivoDevolucao) {
+	public void setIdMotivoDevolucao(Long idMotivoDevolucao) {
 		this.idMotivoDevolucao = idMotivoDevolucao;
 	}
 

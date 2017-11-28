@@ -1,7 +1,6 @@
 package br.com.sisAmostra.ManagerBean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,12 +11,15 @@ import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 
+import br.com.sisAmostra.Entity.Amostra;
 import br.com.sisAmostra.Entity.DevolucaoAmostra;
 import br.com.sisAmostra.Entity.MotivoDevolucao;
 import br.com.sisAmostra.Entity.Usuario;
+import br.com.sisAmostra.Service.AmostraService;
 import br.com.sisAmostra.Service.DevolucaoAmostraService;
 import br.com.sisAmostra.Service.MotivoDevolucaoService;
 import br.com.sisAmostra.Service.UsuarioService;
+import br.com.sisAmostra.Util.Constantes;
 
 @ManagedBean(name = "devolucaoAmostraMB")
 @ViewScoped
@@ -28,11 +30,13 @@ public class DevolucaoAmostraMB {
 	private List<MotivoDevolucao> listMotivoDevolucoes;
 	
 	private List<SelectItem> listaMotivos;
+	private List<SelectItem> listaAmostras;
 
 	public boolean cadastrar;
 	public boolean editar;
 	
 	private Long idMotivo;
+	private Long idAmostra;
 	
 	Usuario usuario = new Usuario();
 	
@@ -44,30 +48,35 @@ public class DevolucaoAmostraMB {
 	
 	@Inject
 	UsuarioService usuarioService;
+	
+	@Inject
+	AmostraService amostraService;
 
 	@PostConstruct
 	public void init() {
 		carregarListas();
-		
-		usuario = usuarioService.buscar(537);//TODO recuperar usuario logado
-		
+		usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
 	}
 
 	private void carregarListas() {
 		listDevolucaoAmostras = devolucaoAmostraService.findAll();
 		popularComboMotivo();
+		popularComboAmostra();
 	}
 
 	public void salvar() {
 		
 		try {
 			
-			Calendar dtDevolucao = Calendar.getInstance();
-			dtDevolucao.setTime(devolucaoAmostra.getDtDevolucaoBean());
-			devolucaoAmostra.setDtDevolucao(dtDevolucao);
+			Amostra amostra = new Amostra();
+			amostra = amostraService.buscar(idAmostra);
+			amostra.getStatusAmostra().setIdStatus(Constantes.DEVOLVIDA);
+			amostraService.inserirOuAtualizar(amostra);
 			
+			devolucaoAmostra.setAmostra(amostra);
 			devolucaoAmostra.setUsuario(usuario);
-			devolucaoAmostra.setMotivoDevolucao(motivoDevolucaoService.buscar(idMotivo.intValue()));
+			MotivoDevolucao motivoDevolucao = motivoDevolucaoService.buscar(idMotivo);
+			devolucaoAmostra.setMotivoDevolucao(motivoDevolucao);
 			
 			devolucaoAmostraService.inserirOuAtualizar(devolucaoAmostra);
 			
@@ -77,7 +86,7 @@ public class DevolucaoAmostraMB {
 			
 			FacesContext.getCurrentInstance().addMessage("sucesso", new FacesMessage(FacesMessage.SEVERITY_INFO, "Devolução Amostra cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 
@@ -99,7 +108,7 @@ public class DevolucaoAmostraMB {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Devolução Amostra deletada com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	
@@ -109,8 +118,8 @@ public class DevolucaoAmostraMB {
 	}
 	
 	public void alterar(){
-		devolucaoAmostra.setDtDevolucaoBean(devolucaoAmostra.getDtDevolucao().getTime());
 		idMotivo = devolucaoAmostra.getMotivoDevolucao().getIdMotivoDevolucao().longValue();
+		idAmostra = devolucaoAmostra.getAmostra().getIdAmostra();
 		editar = Boolean.TRUE;
 		listDevolucaoAmostras = new ArrayList<>();
 	}
@@ -136,6 +145,24 @@ public class DevolucaoAmostraMB {
 			e.getStackTrace();
 		}
 		return listaMotivos;
+	}
+	
+	public List<SelectItem> popularComboAmostra() {
+		this.listaAmostras = new ArrayList<SelectItem>();
+		List<Amostra> saida;
+		try {
+			saida = amostraService.findPorStatus(Constantes.NOVO);
+			for (Amostra amostra : saida) {
+				SelectItem select = new SelectItem();
+				select.setValue(amostra.getIdAmostra());
+				select.setLabel(amostra.getCodSCAD());
+				this.listaAmostras.add(select);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+			e.getStackTrace();
+		}
+		return listaAmostras;
 	}
 	
 	public DevolucaoAmostra getDevolucaoAmostra() {
@@ -202,5 +229,20 @@ public class DevolucaoAmostraMB {
 		this.usuario = usuario;
 	}
 
+	public List<SelectItem> getListaAmostras() {
+		return listaAmostras;
+	}
+
+	public void setListaAmostras(List<SelectItem> listaAmostras) {
+		this.listaAmostras = listaAmostras;
+	}
+
+	public Long getIdAmostra() {
+		return idAmostra;
+	}
+
+	public void setIdAmostra(Long idAmostra) {
+		this.idAmostra = idAmostra;
+	}
 
 }

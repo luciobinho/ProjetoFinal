@@ -28,7 +28,7 @@ public class AmostraService implements Serializable {
 		return amostra;
 	}
 
-	public Amostra buscar(Integer id) {
+	public Amostra buscar(Long id) {
 		return entityManager.find(Amostra.class, id);
 	}
 	
@@ -39,10 +39,18 @@ public class AmostraService implements Serializable {
  
 	}
 
-	public Amostra atualizar(Amostra amostra) {
-		return entityManager.merge(amostra);
+	public List<Amostra> findPorStatus(Long idStatus){		
+		TypedQuery<Amostra> query = entityManager.createNamedQuery("Amostra.findPorStatus", Amostra.class);
+		query.setParameter("idStatus", idStatus);
+        return query.getResultList();
 	}
-
+	
+	public List<Amostra> findPorEmpresa(Long idEmpresa){		
+		TypedQuery<Amostra> query = entityManager.createNamedQuery("Amostra.findPorEmpresa", Amostra.class);
+		query.setParameter("idEmpresa", idEmpresa);
+        return query.getResultList();
+	}
+	
 	public void excluir(Amostra amostra) {
 		amostra = entityManager.merge(amostra);
 		entityManager.remove(amostra);

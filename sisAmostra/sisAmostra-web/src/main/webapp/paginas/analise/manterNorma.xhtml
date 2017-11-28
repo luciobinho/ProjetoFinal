@@ -1,0 +1,227 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="panel panel-default">
+			<h:form class="form-horizontal tabular-form" id="formPrincipal">
+				<div class="panel-heading">
+					<h2>MANTER - NORMA</h2>
+				</div>
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty normaMB.listNormas and !normaMB.cadastrar and !normaMB.editar}">
+					<div class="panel-heading">
+						<h3>Nenhum registro cadastrado!</h3>
+					</div>	
+				</h:panelGroup>
+				<h:panelGroup id="formTabela"
+					rendered="#{not empty normaMB.listNormas}">
+					<div class="panel-body panel-no-padding">
+						<div id="example_wrapper"
+							class="dataTables_wrapper form-inline no-footer">
+							<div class="row">
+								<div class="col-sm-6"></div>
+								<div class="col-sm-6"></div>
+							</div>
+							<h:dataTable
+								class="table table-striped table-bordered dataTable no-footer"
+								cellspacing="0" width="100%" role="grid"
+								aria-describedby="example_info" style="width: 100%;"
+								value="#{normaMB.listNormas}" var="item" border="1">
+								<h:column>
+									<f:facet name="header" class="sorting_asc" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										aria-sort="ascending" style="width: 196px;">
+										<h:outputText value="Código" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.idNorma}" />
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 100px;">
+										<h:outputText value="Descrição" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.descricao}">
+									</h:outputText>
+								</h:column>
+								
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 100px;">
+										<h:outputText value="Ações" />
+									</f:facet>
+									<h:commandButton class="btn btn-warning btn-xs"
+										action="#{normaMB.alterar()}" value="Editar">
+										<f:setPropertyActionListener value="#{item}"
+											target="#{normaMB.norma}" />
+									</h:commandButton>
+									<h:commandButton class="btn btn-danger btn-xs"
+										action="#{normaMB.deletar()}" data-toggle="modal"
+										value="Excluir" data-target="#delete-modal"
+										onclick="$('#modalExcluir').modal('show');" immediate="true">
+										<f:ajax execute="@this" render=":myForm" />
+										<f:setPropertyActionListener value="#{item}"
+											target="#{normaMB.norma}" />
+									</h:commandButton>
+								</h:column>
+							</h:dataTable>
+						</div>
+					</div>
+				</h:panelGroup>
+
+				<!-- cadastro -->
+				<h:panelGroup id="formCadastro" rendered="#{normaMB.cadastrar}">
+					<div class="static-content">
+						<div class="page-content">
+							<div class="page-tabs">
+								<ul class="nav nav-tabs">
+									<li class="dropdown pull-right tabdrop hide"><a
+										class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+											class="fa fa-angle-down"></i> </a>
+										<ul class="dropdown-menu"></ul></li>
+									<li class="active"><a data-toggle="tab" href="#details">Cadastrar</a></li>
+								</ul>
+							</div>
+							<div class="container-fluid">
+								<div class="tab-content">
+									<div class="tab-pane active" id="details">
+										<div class="panel">
+											<div class="panel-body">
+												<div class="tab-pane active" id="details">
+													<h:form action="" class="form-horizontal tabular-form">
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Descrição</label>
+															<div class="col-sm-8 tabular-border">
+																<h:inputText id="codScad" required="true"
+																	class="form-control"
+																	onkeyup="this.value=this.value.toUpperCase();"
+																	value="#{normaMB.norma.descricao}" />
+															</div>
+														</div>
+														
+														<div id="actions" class="row">
+															<div class="col-md-12 tabular-border">
+																<h:commandButton value="Salvar"
+																	action="#{normaMB.salvar()}"
+																	class="btn btn-primary pull-right" />
+																<h:commandButton value="Cancelar"
+																	action="#{normaMB.cancelar()}" immediate="true"
+																	class="btn btn-default pull-right" />
+															</div>
+														</div>
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- .container-fluid -->
+							</div>
+							<!-- #page-content -->
+						</div>
+					</div>
+				</h:panelGroup>
+				<!-- alteração -->
+				<h:panelGroup id="formAlteracao" rendered="#{normaMB.editar}">
+					<div class="static-content">
+						<div class="page-content">
+							<div class="page-tabs">
+								<ul class="nav nav-tabs">
+									<li class="dropdown pull-right tabdrop hide"><a
+										class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+											class="fa fa-angle-down"></i> </a>
+										<ul class="dropdown-menu"></ul></li>
+									<li class="active"><a data-toggle="tab" href="#details">Alterar</a></li>
+								</ul>
+							</div>
+							<div class="container-fluid">
+								<div class="tab-content">
+									<div class="tab-pane active" id="details">
+										<div class="panel">
+											<div class="panel-body">
+												<div class="tab-pane active" id="details">
+													<h:form action="" class="form-horizontal tabular-form">
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">ID</label>
+															<div class="col-sm-8 tabular-border">
+																<h:outputText id="id"
+																	class="form-control"
+																	value="#{normaMB.norma.idNorma}" />
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Descrição</label>
+															<div class="col-sm-8 tabular-border">
+																<h:inputText id="codScad" required="true"
+																	class="form-control"
+																	onkeyup="this.value=this.value.toUpperCase();"
+																	value="#{normaMB.norma.descricao}" />
+															</div>
+														</div>
+														
+														<div id="actions" class="row">
+															<div class="col-md-12 tabular-border">
+																<h:commandButton value="Salvar"
+																	action="#{normaMB.salvar()}"
+																	class="btn btn-primary pull-right" />
+																<h:commandButton value="Cancelar"
+																	action="#{normaMB.cancelar()}" immediate="true"
+																	class="btn btn-default pull-right" />
+															</div>
+														</div>
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- .container-fluid -->
+							</div>
+							<!-- #page-content -->
+						</div>
+					</div>
+				</h:panelGroup>
+				
+				<h:panelGroup rendered="#{!normaMB.cadastrar and !normaMB.editar}">
+					<div class="col-md-12">
+						<h:commandButton class="btn btn-primary pull-right h2" value="Novo"
+							action="#{normaMB.novo()}" />
+					</div>
+				</h:panelGroup>
+				
+				<!-- Modal Excluir -->
+				<div class="modal fade" id="modalExcluir" tabindex="-1"
+					role="dialog" aria-labelledby="modalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Fechar">
+									<span aria-hidden="true"></span>
+								</button>
+								<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
+							</div>
+							<div class="modal-body">Deseja realmente excluir este item?</div>
+							<div class="modal-footer">
+								<h:commandLink value="Sim" type="button" class="btn btn-primary"
+									action="#{normaMB.deletar()}"
+									onclick="$('#modalExcluir').modal('hide');">
+								</h:commandLink>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Não</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+

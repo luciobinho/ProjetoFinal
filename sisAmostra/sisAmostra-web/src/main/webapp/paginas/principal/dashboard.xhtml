@@ -1,0 +1,104 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	template="/template/template.xhtml">
+
+	<ui:define name="conteudo">
+		<div class="panel panel-default">
+			<h:form class="form-horizontal tabular-form" id="formPrincipal">
+				<div class="panel-heading">
+					<h2>DASHBOARD - AMOSTRA</h2>
+				</div>
+				<h:messages autoUpdate="true" />
+				<h:panelGroup rendered="#{empty amostraMB.listaAmostras and !amostraMB.cadastrar and !amostraMB.editar}">
+					<div class="container-fluid">
+						<br />
+						<div id="panel-advancedoptions">
+							<div class="col-md-3">
+					    		<a class="info-tiles tiles-inverse has-footer" href="#">
+								    <div class="tiles-heading">
+								        <div class="pull-left">Novas</div>
+								        <div class="pull-right">
+								        	<div id="tileorders" class="sparkline-block"><canvas style="display: inline-block; width: 39px; height: 13px; vertical-align: top;" width="39" height="13"></canvas></div>
+								        </div>
+								    </div>
+								    <div class="tiles-body">
+								        <div class="text-center">1249</div>
+								    </div>
+								</a>
+					    	</div>
+					    	<div class="col-md-3">
+					    		<a class="info-tiles tiles-green has-footer" href="#">
+								    <div class="tiles-heading">
+								        <div class="pull-left">Em Análise</div>
+								        <div class="pull-right">
+								        	<div id="tilerevenues" class="sparkline-block"><canvas style="display: inline-block; width: 40px; height: 13px; vertical-align: top;" width="40" height="13"></canvas></div>
+								        </div>
+								    </div>
+								    <div class="tiles-body">
+								        <div class="text-center">61250</div>
+								    </div>
+								</a>
+					    	</div>
+					    	<div class="col-md-3">
+					    		<a class="info-tiles tiles-blue has-footer" href="#">
+								    <div class="tiles-heading">
+								        <div class="pull-left">Devolvidas</div>
+								        <div class="pull-right">
+								        	<div id="tiletickets" class="sparkline-block"><canvas style="display: inline-block; width: 13px; height: 13px; vertical-align: top;" width="13" height="13"></canvas></div>
+								        </div>
+								    </div>
+								    <div class="tiles-body">
+								        <div class="text-center">1398</div>
+								    </div>
+								</a>
+					    	</div>
+					    	
+					    	<div class="col-md-3">
+					    		<a class="info-tiles tiles-midnightblue has-footer" href="#">
+								    <div class="tiles-heading">
+								        <div class="pull-left">Concluídas</div>
+								        <div class="pull-right">
+								        	<div id="tilemembers" class="sparkline-block"><canvas style="display: inline-block; width: 39px; height: 13px; vertical-align: top;" width="39" height="13"></canvas></div>
+								        </div>
+								    </div>
+								    <div class="tiles-body">
+								        <div class="text-center">7112</div>
+								    </div>
+								</a>
+					    	</div>
+					    	<div class="row">
+								<div class="col-md-12" data-widget-group="group1">
+									<div class="panel panel-default panel-btn-focused" data-widget="">
+										<div class="panel-heading">
+											<div class="panel-ctrls" data-actions-container="" data-action-collapse="{&quot;target&quot;: &quot;.panel-body&quot;}" data-action-colorpicker="">
+											</div>
+											<h2>
+												<ul class="nav nav-tabs"><li class="dropdown pull-right tabdrop hide"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-angle-down"></i> </a><ul class="dropdown-menu"></ul></li>
+													<li class="active"><a href="#tab-visitor" data-toggle="tab" aria-expanded="true"><i class="fa fa-user visible-xs"></i><span class="hidden-xs">Karl Fischer</span></a></li>
+													<li class=""><a href="#tab-revenues" data-toggle="tab" aria-expanded="false"><i class="fa fa-bar-chart-o visible-xs"></i><span class="hidden-xs">Fulgor Pensky</span></a></li>
+												</ul>
+											</h2>
+										</div>
+										<div class="panel-editbox" data-widget-controls=""></div>
+										<div class="panel-body">
+											<div class="tab-content">
+												<h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+												    <p:chart type="line" model="#{chartView.animatedModel1}" style="width:400px;" />
+												    <p:chart type="bar" model="#{chartView.animatedModel2}" style="width:400px;" />
+												</h:panelGrid>
+											</div>
+										</div>
+									</div>
+								</div>
+					    	</div>
+						</div>
+					</div>	
+				</h:panelGroup>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+

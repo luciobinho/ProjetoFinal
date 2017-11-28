@@ -1,6 +1,7 @@
 <ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 	
 	<ui:param name="root" value="#{request.contextPath}" />
 	
@@ -11,78 +12,97 @@
 						<div class="widget-body welcome-box tabular">
 							<div class="tabular-row">
 								<div class="tabular-cell welcome-avatar">
-									<a href="#"><img src="assets/demo/avatar/avatar_06.png"
-										class="avatar" /></a>
+									<a href="#"></a>
 								</div>
 								<div class="tabular-cell welcome-options">
-									<span class="welcome-text">Welcome,</span> <a href="#"
-										class="name">Alexander Smith</a>
+									<span class="welcome-text">Welcome,</span>
+									<h:outputText value="#{loginMB.usuario.nome}" />
 								</div>
 							</div>
 						</div>
 					</div>
-
-					<div class="widget stay-on-collapse" id="widget-sidebar">
-						<span class="widget-heading">Explore</span>
-						<nav role="navigation" class="widget-body">
-							<ul class="acc-menu">
-								<li><a href="index.html"><i class="fa fa-home"></i><span>Dashboard</span><span
-										class="badge badge-dark">1</span></a></li>
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-code-fork"></i><span>Amostra</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/amostra/manterAmostra.jsf">Manter Amostra</a></li>
-										<li><a href="#{root}/paginas/amostra/manterClasse.jsf">Manter Classe</a></li>
-										<li><a href="#{root}/paginas/amostra/manterTipoEnsaio.jsf">Manter Tipo Ensaio</a></li>
-										<li><a href="#{root}/paginas/amostra/manterStatusAmostra.jsf">Manter Status</a></li>
-									</ul></li>
-								<li class="hasChild"><a href="javascript:;"><i
-									class="fa fa-cogs"></i><span>Análise</span></a>
+					<c:if test="#{loginMB.usuario.tipo eq 'Interno'}">
+						<div class="widget stay-on-collapse" id="widget-sidebar">
+							<span class="widget-heading">Explore</span>
+							<nav role="navigation" class="widget-body">
 								<ul class="acc-menu">
-									<li><a href="#{root}/paginas/analise/manterAnalise.jsf">Manter Análise</a></li>
-								</ul></li>
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-eyedropper"></i><span>Laboratório</span></a>
+									<li><a href="#{root}/paginas/principal/dashboard.jsf">Dashboard</a></li>
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-code-fork"></i><span>Amostra</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/amostra/manterAmostra.jsf">Manter Amostra</a></li>
+											<li><a href="#{root}/paginas/amostra/manterClasse.jsf">Manter Classe</a></li>
+											<li><a href="#{root}/paginas/amostra/manterTipoEnsaio.jsf">Manter Tipo Ensaio</a></li>
+											<li><a href="#{root}/paginas/amostra/manterStatusAmostra.jsf">Manter Status</a></li>
+										</ul></li>
+									<li class="hasChild"><a href="javascript:;"><i
+										class="fa fa-cogs"></i><span>Análise</span></a>
 									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/laboratorio/manterLaboratorio.jsf">Manter Laboratório</a></li>
+										<li><a href="#{root}/paginas/analise/manterAnalise.jsf">Manter Análise</a></li>
+										<li><a href="#{root}/paginas/analise/manterStatusAnalise.jsf">Manter Status</a></li>
+										<li><a href="#{root}/paginas/analise/manterCaracteristica.jsf">Manter Característica</a></li>
+										<li><a href="#{root}/paginas/analise/manterNorma.jsf">Manter Norma</a></li>
+										<li><a href="#{root}/paginas/analise/manterEspecificacao.jsf">Manter Especificação</a></li>
 									</ul></li>
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-flask"></i><span>Produto</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/produto/manterProduto.jsf">Manter Produto</a></li>
-									</ul></li>	
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-wrench"></i><span>Equipamento</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/equipamento/manterEquipamento.jsf">Manter Equipamento</a></li>
-										<li><a href="#{root}/paginas/equipamento/manterStatusEquipamento.jsf">Manter Status</a></li>
-									</ul></li>
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-pencil"></i><span>Devolução</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/devolucao/manterDevolucao.jsf">Manter Devolução</a></li>
-										<li><a href="#{root}/paginas/devolucao/manterMotivoDevolucao.jsf">Manter Motivo Devolução</a></li>
-									</ul></li>
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-table"></i><span>Tarefa</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/tarefa/analisarTarefa.jsf">Analisar Tarefa</a></li>
-										<li><a href="#{root}/paginas/tarefa/manterTarefa.jsf">Manter Tarefa</a></li>
-										<li><a href="#{root}/paginas/tarefa/manterStatusTarefa.jsf">Manter Status</a></li>
-									</ul></li>
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-users"></i><span>Usuário</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/usuario/manterUsuario.jsf">Manter Usuário</a></li>
-									</ul></li>	
-								<li class="hasChild"><a href="javascript:;"><i
-										class="fa fa-sitemap"></i><span>Empresa</span></a>
-									<ul class="acc-menu">
-										<li><a href="#{root}/paginas/empresa/manterEmpresa.jsf">Manter Empresa</a></li>
-									</ul></li>	
-							</ul>		
-						</nav>
-					</div>
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-eyedropper"></i><span>Laboratório</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/laboratorio/manterLaboratorio.jsf">Manter Laboratório</a></li>
+										</ul></li>
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-flask"></i><span>Produto</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/produto/manterProduto.jsf">Manter Produto</a></li>
+										</ul></li>	
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-wrench"></i><span>Equipamento</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/equipamento/manterEquipamento.jsf">Manter Equipamento</a></li>
+											<li><a href="#{root}/paginas/equipamento/manterStatusEquipamento.jsf">Manter Status</a></li>
+										</ul></li>
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-pencil"></i><span>Devolução</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/devolucao/manterDevolucao.jsf">Manter Devolução</a></li>
+											<li><a href="#{root}/paginas/devolucao/manterMotivoDevolucao.jsf">Manter Motivo Devolução</a></li>
+										</ul></li>
+									<!-- <li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-table"></i><span>Tarefa</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/tarefa/analisarTarefa.jsf">Analisar Tarefa</a></li>
+											<li><a href="#{root}/paginas/tarefa/manterTarefa.jsf">Manter Tarefa</a></li>
+											<li><a href="#{root}/paginas/tarefa/manterStatusTarefa.jsf">Manter Status</a></li>
+										</ul></li> -->
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-users"></i><span>Usuário</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/usuario/manterUsuario.jsf">Manter Usuário</a></li>
+										</ul></li>	
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-sitemap"></i><span>Empresa</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/empresa/manterEmpresa.jsf">Manter Empresa</a></li>
+										</ul></li>	
+								</ul>		
+							</nav>
+						</div>
+					</c:if>	
+					<c:if test="#{loginMB.usuario.tipo eq 'Externo'}">
+						<div class="widget stay-on-collapse" id="widget-sidebar">
+							<span class="widget-heading">Explore</span>
+							<nav role="navigation" class="widget-body">
+								<ul class="acc-menu">
+									<li><a href="#{root}/paginas/principal/dashboard.jsf">Dashboard</a></li>
+									<li class="hasChild"><a href="javascript:;"><i
+											class="fa fa-code-fork"></i><span>Amostra</span></a>
+										<ul class="acc-menu">
+											<li><a href="#{root}/paginas/amostra/manterAmostraCliente.jsf">Amostra</a></li>
+										</ul>
+									</li>
+								</ul>
+							</nav>
+						</div>
+					</c:if>				
 				</div>
 			</div>
 		</div>

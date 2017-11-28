@@ -1,10 +1,11 @@
 package br.com.sisAmostra.Entity;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -15,23 +16,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Amostra")
 @NamedQueries({
-	@NamedQuery(name = "Amostra.findAll", query = "SELECT A FROM Amostra A")
+	@NamedQuery(name = "Amostra.findAll", query = "SELECT A FROM Amostra A"),
+	@NamedQuery(name = "Amostra.findPorStatus", query = "SELECT A FROM Amostra A JOIN A.statusAmostra SA WHERE SA.idStatus = :idStatus"),
+	@NamedQuery(name = "Amostra.findPorEmpresa", query = "SELECT A FROM Amostra A JOIN A.empresa E WHERE E.idEmpresa = :idEmpresa")
 })
 
 public class Amostra {
 	
 	@Id
 	@Column
+	@GeneratedValue
 	private Long idAmostra;
-	
-	@Column
-	private String descricao;
 	
 	@Column
 	private String dsCondicaoArmazenamento;	
 	
 	@Column
-	private Calendar dtCriacao;	
+	private Date dtCriacao;	
 	
 	@Column
 	private String dsObsSMS;
@@ -42,10 +43,6 @@ public class Amostra {
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idStatus")
 	private StatusAmostra statusAmostra;
-	
-	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="idUsuario")
-	private Usuario usuario;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idTipoEnsaio")
@@ -71,14 +68,6 @@ public class Amostra {
 		this.idAmostra = idAmostra;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
 	public String getDsCondicaoArmazenamento() {
 		return dsCondicaoArmazenamento;
 	}
@@ -87,11 +76,11 @@ public class Amostra {
 		this.dsCondicaoArmazenamento = dsCondicaoArmazenamento;
 	}
 
-	public Calendar getDtCriacao() {
+	public Date getDtCriacao() {
 		return dtCriacao;
 	}
 
-	public void setDtCriacao(Calendar dtCriacao) {
+	public void setDtCriacao(Date dtCriacao) {
 		this.dtCriacao = dtCriacao;
 	}
 
@@ -117,14 +106,6 @@ public class Amostra {
 
 	public void setStatusAmostra(StatusAmostra statusAmostra) {
 		this.statusAmostra = statusAmostra;
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	public TipoEnsaio getTipoEnsaio() {

@@ -2,11 +2,12 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
 	<ui:define name="conteudo">
 		<div class="panel panel-default">
-			<h:form id="formPrincipal">
+			<h:form class="form-horizontal tabular-form" id="formPrincipal">
 				<div class="panel-heading">
 					<h2>MANTER - EQUIPAMENTO</h2>
 				</div>
@@ -40,32 +41,25 @@
 										value="#{item.idEquipamento}" />
 								</h:column>
 								<h:column>
-									<f:facet name="header" class="sorting_asc" tabindex="0"
-										aria-controls="example" rowspan="1" colspan="1"
-										aria-sort="ascending" style="width: 196px;">
-										<h:outputText value="CD Classe" />
-									</f:facet>
-									<h:outputText class="gradeA odd" role="row"
-										value="#{item.cdPatrimonio}" />
-								</h:column>
-								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
 										style="width: 212px;">
-										<h:outputText value="Descrição" />
+										<h:outputText value="Status" />
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
 										value="#{item.descricao}" />
 								</h:column>
 								<h:column>
-									<f:facet name="header" class="sorting_asc" tabindex="0"
+									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
-										aria-sort="ascending" style="width: 196px;">
+										style="width: 100px;">
 										<h:outputText value="Laboratório" />
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
-										value="#{item.laboratorio.descricao}" />
+										value="#{item.laboratorio.descricao}">
+									</h:outputText>
 								</h:column>
+								
 								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
@@ -76,234 +70,228 @@
 										value="#{item.statusEquipamento.descricao}">
 									</h:outputText>
 								</h:column>
+								
 								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
 										style="width: 100px;">
 										<h:outputText value="Ações" />
 									</f:facet>
-									<h:commandButton class="btn btn-success btn-xs"
-										action="#{equipamentoMB.visualizar()}" value="Visualizar">
-										<f:setPropertyActionListener value="#{item}"
-											target="#{equipamentoMB.equipamento}" />
-									</h:commandButton>
 									<h:commandButton class="btn btn-warning btn-xs"
-										action="#{equipamentoMB.alterar()}" data-toggle="modal"
-										value="Editar">
+										action="#{equipamentoMB.alterar()}" value="Editar">
 										<f:setPropertyActionListener value="#{item}"
 											target="#{equipamentoMB.equipamento}" />
 									</h:commandButton>
 									<h:commandButton class="btn btn-danger btn-xs"
-										data-toggle="modal" value="Excluir"
-										data-target="#delete-modal"
+										action="#{equipamentoMB.deletar()}" data-toggle="modal"
+										value="Excluir" data-target="#delete-modal"
 										onclick="$('#modalExcluir').modal('show');" immediate="true">
+										<f:ajax execute="@this" render=":myForm" />
 										<f:setPropertyActionListener value="#{item}"
 											target="#{equipamentoMB.equipamento}" />
-										<f:ajax execute="@this" render=":myForm" />
 									</h:commandButton>
 								</h:column>
 							</h:dataTable>
 						</div>
+					</div>
+				</h:panelGroup>
 
-						<!-- Modal Excluir -->
-						<div class="modal fade" id="modalExcluir" tabindex="-1"
-							role="dialog" aria-labelledby="modalLabel">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal"
-											aria-label="Fechar">
-											<span aria-hidden="true"></span>
-										</button>
-										<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
-									</div>
-									<div class="modal-body">Deseja realmente excluir este
-										item?</div>
-									<div class="modal-footer">
-										<h:commandLink value="Sim" type="button"
-											class="btn btn-primary" action="#{equipamentoMB.deletar()}"
-											onclick="$('#modalExcluir').modal('hide');">
-										</h:commandLink>
-										<button type="button" class="btn btn-default"
-											data-dismiss="modal">Não</button>
+				<!-- cadastro -->
+				<h:panelGroup id="formCadastro" rendered="#{equipamentoMB.cadastrar}">
+					<div class="static-content">
+						<div class="page-content">
+							<div class="page-tabs">
+								<ul class="nav nav-tabs">
+									<li class="dropdown pull-right tabdrop hide"><a
+										class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+											class="fa fa-angle-down"></i> </a>
+										<ul class="dropdown-menu"></ul></li>
+									<li class="active"><a data-toggle="tab" href="#details">Cadastrar</a></li>
+								</ul>
+							</div>
+							<div class="container-fluid">
+								<div class="tab-content">
+									<div class="tab-pane active" id="details">
+										<div class="panel">
+											<div class="panel-body">
+												<div class="tab-pane active" id="details">
+													<h:form action="" class="form-horizontal tabular-form">
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Descrição</label>
+															<div class="col-sm-8 tabular-border">
+																<h:inputText id="condArmazenamento" required="true"
+																	class="form-control"
+																	onkeyup="this.value=this.value.toUpperCase();"
+																	value="#{equipamentoMB.equipamento.descricao}" />
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Laboratório</label>
+															<div class="col-sm-8 tabular-border">
+																<h:selectOneMenu class="form-control"
+																	value="#{equipamentoMB.idLaboratorio}">
+																	<f:selectItem class="form-control" itemValue=""
+																		itemLabel="Selecione..." />
+																	<f:selectItems class="form-control"
+																		value="#{equipamentoMB.listaLaboratorio}" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Status</label>
+															<div class="col-sm-8 tabular-border">
+																<h:selectOneMenu class="form-control"
+																	value="#{equipamentoMB.idStatus}">
+																	<f:selectItem class="form-control" itemValue=""
+																		itemLabel="Selecione..." />
+																	<f:selectItems class="form-control"
+																		value="#{equipamentoMB.listaStatus}" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														
+														<div id="actions" class="row">
+															<div class="col-md-12 tabular-border">
+																<h:commandButton value="Salvar"
+																	action="#{equipamentoMB.salvar()}"
+																	class="btn btn-primary pull-right" />
+																<h:commandButton value="Cancelar"
+																	action="#{equipamentoMB.cancelar()}" immediate="true"
+																	class="btn btn-default pull-right" />
+															</div>
+														</div>
+													</h:form>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
+								<!-- .container-fluid -->
 							</div>
+							<!-- #page-content -->
 						</div>
 					</div>
-					<br />
+				</h:panelGroup>
+				<!-- alteração -->
+				<h:panelGroup id="formAlteracao" rendered="#{equipamentoMB.editar}">
+					<div class="static-content">
+						<div class="page-content">
+							<div class="page-tabs">
+								<ul class="nav nav-tabs">
+									<li class="dropdown pull-right tabdrop hide"><a
+										class="dropdown-toggle" data-toggle="dropdown" href="#"><i
+											class="fa fa-angle-down"></i> </a>
+										<ul class="dropdown-menu"></ul></li>
+									<li class="active"><a data-toggle="tab" href="#details">Alterar</a></li>
+								</ul>
+							</div>
+							<div class="container-fluid">
+								<div class="tab-content">
+									<div class="tab-pane active" id="details">
+										<div class="panel">
+											<div class="panel-body">
+												<div class="tab-pane active" id="details">
+													<h:form action="" class="form-horizontal tabular-form">
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">ID</label>
+															<div class="col-sm-8 tabular-border">
+																<h:outputText id="id"
+																	class="form-control"
+																	value="#{equipamentoMB.equipamento.idEquipamento}" />
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Descrição</label>
+															<div class="col-sm-8 tabular-border">
+																<h:inputText id="condArmazenamento" required="true"
+																	class="form-control"
+																	onkeyup="this.value=this.value.toUpperCase();"
+																	value="#{equipamentoMB.equipamento.descricao}" />
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Laboratório</label>
+															<div class="col-sm-8 tabular-border">
+																<h:selectOneMenu class="form-control"
+																	value="#{equipamentoMB.idLaboratorio}">
+																	<f:selectItem class="form-control" itemValue=""
+																		itemLabel="Selecione..." />
+																	<f:selectItems class="form-control"
+																		value="#{equipamentoMB.listaLaboratorio}" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Status</label>
+															<div class="col-sm-8 tabular-border">
+																<h:selectOneMenu class="form-control"
+																	value="#{equipamentoMB.idStatus}">
+																	<f:selectItem class="form-control" itemValue=""
+																		itemLabel="Selecione..." />
+																	<f:selectItems class="form-control"
+																		value="#{equipamentoMB.listaStatus}" />
+																</h:selectOneMenu>
+															</div>
+														</div>
+														
+														<div id="actions" class="row">
+															<div class="col-md-12 tabular-border">
+																<h:commandButton value="Salvar"
+																	action="#{equipamentoMB.salvar()}"
+																	class="btn btn-primary pull-right" />
+																<h:commandButton value="Cancelar"
+																	action="#{equipamentoMB.cancelar()}" immediate="true"
+																	class="btn btn-default pull-right" />
+															</div>
+														</div>
+													</h:form>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- .container-fluid -->
+							</div>
+							<!-- #page-content -->
+						</div>
+					</div>
 				</h:panelGroup>
 				
 				<h:panelGroup rendered="#{!equipamentoMB.cadastrar and !equipamentoMB.editar}">
 					<div class="col-md-12">
-						<h:commandButton class="btn btn-primary pull-right h2"
-							value="Novo" action="#{equipamentoMB.novo()}" />
+						<h:commandButton class="btn btn-primary pull-right h2" value="Novo"
+							action="#{equipamentoMB.novo()}" />
 					</div>
-				</h:panelGroup>	
-					
-				<h:panelGroup id="formCadastrar"
-					rendered="#{equipamentoMB.cadastrar}">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<h2>CADASTRAR</h2>
+				</h:panelGroup>
+				
+				<!-- Modal Excluir -->
+				<div class="modal fade" id="modalExcluir" tabindex="-1"
+					role="dialog" aria-labelledby="modalLabel">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Fechar">
+									<span aria-hidden="true"></span>
+								</button>
+								<h4 class="modal-title" id="modalLabel">Excluir Item</h4>
 							</div>
-							<h:messages autoUpdate="true" />
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">CD Patrimônio:</label>
-									<h:inputText id="cdClasse" class="form-control"
-										value="#{equipamentoMB.equipamento.cdPatrimonio}" />
-								</div>
-
-								<div class="form-group col-md-4">
-									<label for="campo1">Status:</label>
-									<h:selectOneMenu class="form-control"
-										value="#{equipamentoMB.idStatus}">
-										<f:selectItem class="form-control" itemValue=""
-											itemLabel="Selecione..." />
-										<f:selectItems class="form-control"
-											value="#{equipamentoMB.listaStatus}" />
-									</h:selectOneMenu>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="campo1">Laboratório:</label>
-									<h:selectOneMenu class="form-control"
-										value="#{equipamentoMB.idLaboratorio}">
-										<f:selectItem class="form-control" itemValue=""
-											itemLabel="Selecione..." />
-										<f:selectItems class="form-control"
-											value="#{equipamentoMB.listaLaboratorio}" />
-									</h:selectOneMenu>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Descrição:</label>
-									<h:inputText id="descricao" class="form-control"
-										onkeyup="this.value=this.value.toUpperCase();"
-										value="#{equipamentoMB.equipamento.descricao}" />
-								</div>
+							<div class="modal-body">Deseja realmente excluir este item?</div>
+							<div class="modal-footer">
+								<h:commandLink value="Sim" type="button" class="btn btn-primary"
+									action="#{equipamentoMB.deletar()}"
+									onclick="$('#modalExcluir').modal('hide');">
+								</h:commandLink>
+								<button type="button" class="btn btn-default"
+									data-dismiss="modal">Não</button>
 							</div>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<h:commandButton class="btn btn-primary pull-right h2"
-							value="Cancelar" action="#{equipamentoMB.cancelar()}" />
-						<h:commandButton class="btn btn-primary pull-right h2"
-							value="Salvar" update="geral" ajax="true"
-							action="#{equipamentoMB.salvar()}" />
-					</div>
-				</h:panelGroup>
-				<h:panelGroup id="formAlterar" rendered="#{equipamentoMB.editar}">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<h2>ALTERAR</h2>
-							</div>
-							<h:messages autoUpdate="true" />
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Código:</label>
-									<h:inputText id="codigoAlt" class="form-control"
-										value="#{equipamentoMB.equipamento.idEquipamento}" />
-								</div>
-								<div class="form-group col-md-4">
-									<label for="campo1">CD Patrimônio:</label>
-									<h:inputText id="cdClasseAlt" class="form-control"
-										value="#{equipamentoMB.equipamento.cdPatrimonio}" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Status:</label>
-									<h:selectOneMenu class="form-control"
-										value="#{equipamentoMB.idStatus}">
-										<f:selectItem class="form-control" itemValue=""
-											itemLabel="Selecione..." />
-										<f:selectItems class="form-control"
-											value="#{equipamentoMB.listaStatus}" />
-									</h:selectOneMenu>
-								</div>
-								<div class="form-group col-md-4">
-									<label for="campo1">Laboratório:</label>
-									<h:selectOneMenu class="form-control"
-										value="#{equipamentoMB.idLaboratorio}">
-										<f:selectItem class="form-control" itemValue=""
-											itemLabel="Selecione..." />
-										<f:selectItems class="form-control"
-											value="#{equipamentoMB.listaLaboratorio}" />
-									</h:selectOneMenu>
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Descrição:</label>
-									<h:inputText id="descricaoAlt" class="form-control"
-										onkeyup="this.value=this.value.toUpperCase();"
-										value="#{equipamentoMB.equipamento.descricao}" />
-								</div>
-							</div>
-							<div id="actions" class="row">
-								<div class="col-md-12">
-									<h:commandButton value="Salvar"
-										action="#{equipamentoMB.salvar()}" class="btn btn-primary" />
-									<h:commandButton value="Cancelar"
-										action="#{equipamentoMB.cancelar()}" class="btn btn-default" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</h:panelGroup>
-				<h:panelGroup id="formVisualizar"
-					rendered="#{equipamentoMB.visualizar}">
-					<div class="panel panel-default">
-						<div class="panel-heading">
-							<div class="row">
-								<h2>VISUALIZAR</h2>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Código:</label>
-									<h:outputText id="codigoVisu" class="form-control"
-										value="#{equipamentoMB.equipamento.idEquipamento}" />
-								</div>
-								<div class="form-group col-md-4">
-									<label for="campo1">CD Patrimônio:</label>
-									<h:outputText id="cdClasseVisu" class="form-control"
-										value="#{equipamentoMB.equipamento.cdPatrimonio}" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Status:</label>
-									<h:outputText id="cdStatusVisu" class="form-control"
-										value="#{equipamentoMB.equipamento.statusEquipamento.descricao}" />
-								</div>
-								<div class="form-group col-md-4">
-									<label for="campo1">Laboratório:</label>
-									<h:outputText id="cdLaboratorioVisu" class="form-control"
-										value="#{equipamentoMB.equipamento.laboratorio.descricao}" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="form-group col-md-4">
-									<label for="campo1">Descrição:</label>
-									<h:outputText id="descricaoVisu" class="form-control"
-										value="#{equipamentoMB.equipamento.descricao}" />
-								</div>
-							</div>
-
-							<div id="actions" class="row">
-								<div class="col-md-12">
-									<h:commandButton class="btn btn-primary pull-right h2"
-										value="Cancelar" action="#{equipamentoMB.cancelar()}" />
-								</div>
-							</div>
-						</div>
-					</div>
-				</h:panelGroup>
+				</div>
 			</h:form>
 		</div>
 	</ui:define>
 </ui:composition>
+

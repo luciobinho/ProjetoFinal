@@ -28,7 +28,7 @@ public class LaboratorioService implements Serializable {
 		return laboratorio;
 	}
 
-	public Laboratorio buscar(Integer id) {
+	public Laboratorio buscar(Long id) {
 		return entityManager.find(Laboratorio.class, id);
 	}
 	

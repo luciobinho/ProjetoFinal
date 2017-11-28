@@ -2,6 +2,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
 	<ui:define name="conteudo">
@@ -42,6 +43,16 @@
 								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 100px;">
+										<h:outputText value="Amostra" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.amostra.codSCAD}">
+									</h:outputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
 										style="width: 212px;">
 										<h:outputText value="Descrição" />
 									</f:facet>
@@ -57,6 +68,16 @@
 									<h:outputText class="gradeA odd" role="row"
 										value="#{item.dtDevolucao.time}">
 										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+								</h:column>
+								<h:column>
+									<f:facet name="header" class="sorting" tabindex="0"
+										aria-controls="example" rowspan="1" colspan="1"
+										style="width: 100px;">
+										<h:outputText value="Funcionário" />
+									</f:facet>
+									<h:outputText class="gradeA odd" role="row"
+										value="#{item.usuario.nome}">
 									</h:outputText>
 								</h:column>
 								<h:column>
@@ -127,10 +148,20 @@
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Data de Devolução</label>
-															<div class="date col-sm-4 tabular-border" id="datepicker" data-provide="datepicker">
-																<h:inputText value="#{devolucaoAmostraMB.devolucaoAmostra.dtDevolucaoBean}" required="true" class="form-control">
-																	<f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
-																</h:inputText>
+															<div class="col-sm-4 tabular-border">
+																<p:calendar id="dtDevolucao" value="#{devolucaoAmostraMB.devolucaoAmostra.dtDevolucao}" required="true" pattern="dd/mm/yyyy"/>
+															</div>
+														</div>
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Amostra</label>
+															<div class="col-sm-8 tabular-border">
+																<h:selectOneMenu class="form-control"
+																	value="#{devolucaoAmostraMB.idAmostra}">
+																	<f:selectItem class="form-control" itemValue=""
+																		itemLabel="Selecione..." />
+																	<f:selectItems class="form-control"
+																		value="#{devolucaoAmostraMB.listaAmostras}" />
+																</h:selectOneMenu>
 															</div>
 														</div>
 														
@@ -207,10 +238,21 @@
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Data de Devolução</label>
-															<div class="date col-sm-4 tabular-border" id="datepicker" data-provide="datepicker">
-																<h:inputText value="#{devolucaoAmostraMB.devolucaoAmostra.dtDevolucaoBean}" required="true" class="form-control">
-																	<f:convertDateTime pattern="dd/MM/yyyy" type="date"/>
-																</h:inputText>
+															<div class="col-sm-4 tabular-border">
+																<p:calendar id="dtDevolucao" pattern="dd/mm/yyyy" value="#{devolucaoAmostraMB.devolucaoAmostra.dtDevolucao}"/>
+															</div>
+														</div>
+														
+														<div class="form-group">
+															<label for="" class="control-label col-sm-2">Amostra</label>
+															<div class="col-sm-8 tabular-border">
+																<h:selectOneMenu class="form-control"
+																	value="#{devolucaoAmostraMB.idAmostra}">
+																	<f:selectItem class="form-control" itemValue=""
+																		itemLabel="Selecione..." />
+																	<f:selectItems class="form-control"
+																		value="#{devolucaoAmostraMB.listaAmostras}" />
+																</h:selectOneMenu>
 															</div>
 														</div>
 														

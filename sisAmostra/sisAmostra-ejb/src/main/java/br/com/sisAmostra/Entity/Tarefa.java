@@ -45,7 +45,7 @@ public class Tarefa {
 	@JoinColumn(name="idStatus")
 	private StatusTarefa statusTarefa;
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
 	

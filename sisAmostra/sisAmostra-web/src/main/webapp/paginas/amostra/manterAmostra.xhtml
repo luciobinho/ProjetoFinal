@@ -2,6 +2,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
 	template="/template/template.xhtml">
 
 	<ui:define name="conteudo">
@@ -43,10 +44,10 @@
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
 										style="width: 212px;">
-										<h:outputText value="Descrição" />
+										<h:outputText value="Status" />
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
-										value="#{item.descricao}" />
+										value="#{item.statusAmostra.descricao}" />
 								</h:column>
 								<h:column>
 									<f:facet name="header" class="sorting" tabindex="0"
@@ -62,7 +63,7 @@
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
 										style="width: 100px;">
-										<h:outputText value="Código SCAD" />
+										<h:outputText value="SCAD" />
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
 										value="#{item.codSCAD}">
@@ -76,6 +77,7 @@
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
 										value="#{item.dtCriacao}">
+										<f:convertDateTime pattern="dd/mm/yyyy"/>
 									</h:outputText>
 								</h:column>
 								
@@ -94,10 +96,10 @@
 									<f:facet name="header" class="sorting" tabindex="0"
 										aria-controls="example" rowspan="1" colspan="1"
 										style="width: 100px;">
-										<h:outputText value="Empresa" />
+										<h:outputText value="Obs. SMS" />
 									</f:facet>
 									<h:outputText class="gradeA odd" role="row"
-										value="#{item.empresa.descricao}">
+										value="#{item.dsObsSMS}">
 									</h:outputText>
 								</h:column>
 								
@@ -169,43 +171,32 @@
 												<div class="tab-pane active" id="details">
 													<h:form action="" class="form-horizontal tabular-form">
 														<div class="form-group">
-															<label for="" class="control-label col-sm-2">Descrição</label>
-															<div class="col-sm-8 tabular-border">
-																<h:inputText id="descricao" required="true"
-																	class="form-control"
-																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{amostraMB.amostra.descricao}" />
-															</div>
-														</div>
-														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Condição de Armazenamento</label>
 															<div class="col-sm-8 tabular-border">
-																<h:inputText id="condArmazenamento" required="true"
+																<h:inputText id="condArmazenamento" required="true" requiredMessage="Condição de Armazenamento deve ser informada!"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
 																	value="#{amostraMB.amostra.dsCondicaoArmazenamento}" />
 															</div>
 														</div>
 														<div class="form-group">
-															<label for="" class="control-label col-sm-2">Código SCAD</label>
+															<label for="" class="control-label col-sm-2">SCAD</label>
 															<div class="col-sm-8 tabular-border">
-																<h:inputText id="codScad" required="true"
+																<h:inputText id="codScad" required="true" requiredMessage="SCAD deve ser informada!"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{amostraMB.amostra.dsCondicaoArmazenamento}" />
+																	value="#{amostraMB.amostra.codSCAD}" />
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Data de Criação</label>
 															<div class="col-sm-4 tabular-border">
-																<h:inputText id="dtCriacao" required="true"
-																	styleClass="form-control" maxlength="7"
-																	value="#{amostraMB.amostra.dtCriacao}"/>
+																<p:calendar id="dtCriacao" value="#{amostraMB.amostra.dtCriacao}" required="true" pattern="dd/mm/yyyy"/>
 															</div>
 															
 															<label for="" class="control-label col-sm-2">Observação SMS</label>
 															<div class="col-sm-4 tabular-border">
-																<h:inputText id="obsSms" required="true"
+																<h:inputText id="obsSms" required="true" requiredMessage="Observação SMS deve ser informada!"
 																	class="form-control" maxlength="9"
 																	onkeyup="this.value=this.value.toUpperCase();"
 																	value="#{amostraMB.amostra.dsObsSMS}" />
@@ -214,7 +205,7 @@
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Laboratório</label>
 															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
+																<h:selectOneMenu class="form-control" required="true" requiredMessage="Laboratório deve ser informado!"
 																	value="#{amostraMB.idLaboratorio}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
@@ -227,7 +218,7 @@
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Tipo Ensaio</label>
 															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
+																<h:selectOneMenu class="form-control" required="true" requiredMessage="Tipo Ensaio deve ser informado!"
 																	value="#{amostraMB.idTipoEnsaio}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
@@ -240,9 +231,9 @@
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Classe Amostra</label>
 															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
+																<h:selectOneMenu class="form-control" required="true" requiredMessage="Classe Amostra deve ser informada!"
 																	value="#{amostraMB.idClasseAmostra}">
-																	<f:selectItem class="form-control" itemValue=""
+																	<f:selectItem class="form-control" itemValue="" 
 																		itemLabel="Selecione..." />
 																	<f:selectItems class="form-control"
 																		value="#{amostraMB.listaClasseAmostra}" />
@@ -251,21 +242,9 @@
 														</div>
 														
 														<div class="form-group">
-															<label for="" class="control-label col-sm-2">Funcionário</label>
-															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
-																	value="#{amostraMB.idFuncionario}">
-																	<f:selectItem class="form-control" itemValue=""
-																		itemLabel="Selecione..." />
-																	<f:selectItems class="form-control"
-																		value="#{amostraMB.listaFuncionario}" />
-																</h:selectOneMenu>
-															</div>
-														</div>
-														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Status</label>
 															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
+																<h:selectOneMenu class="form-control" disabled="#{amostraMB.bloquear}"
 																	value="#{amostraMB.idStatus}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
@@ -277,7 +256,7 @@
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Empresa</label>
 															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
+																<h:selectOneMenu class="form-control" required="true" requiredMessage="Empresa deve ser informada!"
 																	value="#{amostraMB.idEmpresa}">
 																	<f:selectItem class="form-control" itemValue=""
 																		itemLabel="Selecione..." />
@@ -338,15 +317,6 @@
 															</div>
 														</div>
 														<div class="form-group">
-															<label for="" class="control-label col-sm-2">Descrição</label>
-															<div class="col-sm-8 tabular-border">
-																<h:inputText id="descricao" required="true"
-																	class="form-control"
-																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{amostraMB.amostra.descricao}" />
-															</div>
-														</div>
-														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Condição de Armazenamento</label>
 															<div class="col-sm-8 tabular-border">
 																<h:inputText id="condArmazenamento" required="true"
@@ -356,20 +326,18 @@
 															</div>
 														</div>
 														<div class="form-group">
-															<label for="" class="control-label col-sm-2">Código SCAD</label>
+															<label for="" class="control-label col-sm-2">SCAD</label>
 															<div class="col-sm-8 tabular-border">
 																<h:inputText id="codScad" required="true"
 																	class="form-control"
 																	onkeyup="this.value=this.value.toUpperCase();"
-																	value="#{amostraMB.amostra.dsCondicaoArmazenamento}" />
+																	value="#{amostraMB.amostra.codSCAD}" />
 															</div>
 														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Data de Criação</label>
 															<div class="col-sm-4 tabular-border">
-																<h:inputText id="dtCriacao" required="true"
-																	styleClass="form-control" maxlength="7"
-																	value="#{amostraMB.amostra.dtCriacao}"/>
+																<p:calendar id="dtCriacao" pattern="dd/mm/yyyy" value="#{amostraMB.amostra.dtCriacao}"/>
 															</div>
 															
 															<label for="" class="control-label col-sm-2">Observação SMS</label>
@@ -419,18 +387,6 @@
 															</div>
 														</div>
 														
-														<div class="form-group">
-															<label for="" class="control-label col-sm-2">Funcionário</label>
-															<div class="col-sm-8 tabular-border">
-																<h:selectOneMenu class="form-control"
-																	value="#{amostraMB.idFuncionario}">
-																	<f:selectItem class="form-control" itemValue=""
-																		itemLabel="Selecione..." />
-																	<f:selectItems class="form-control"
-																		value="#{amostraMB.listaFuncionario}" />
-																</h:selectOneMenu>
-															</div>
-														</div>
 														<div class="form-group">
 															<label for="" class="control-label col-sm-2">Status</label>
 															<div class="col-sm-8 tabular-border">

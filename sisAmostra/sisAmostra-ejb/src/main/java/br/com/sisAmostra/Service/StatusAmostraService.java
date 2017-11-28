@@ -28,7 +28,7 @@ public class StatusAmostraService implements Serializable {
 		return statusAmostra;
 	}
 
-	public StatusAmostra buscar(Integer id) {
+	public StatusAmostra buscar(Long id) {
 		return entityManager.find(StatusAmostra.class, id);
 	}
 	
@@ -36,9 +36,14 @@ public class StatusAmostraService implements Serializable {
 		TypedQuery<StatusAmostra> query = entityManager.createNamedQuery("StatusAmostra.findAll", StatusAmostra.class);
 		
         return query.getResultList();
- 
 	}
 
+	public Long sequence(){		
+		TypedQuery<Long> query = entityManager.createNamedQuery("StatusAmostra.sequence", Long.class);
+		
+        return query.getSingleResult();
+	}
+	
 	public StatusAmostra atualizar(StatusAmostra statusAmostra) {
 		return entityManager.merge(statusAmostra);
 	}

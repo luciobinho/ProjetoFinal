@@ -2,17 +2,16 @@ package br.com.sisAmostra.ManagerBean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import br.com.sisAmostra.Entity.Usuario;
 import br.com.sisAmostra.Service.UsuarioService;
 
 @ManagedBean(name = "loginMB")
-@ViewScoped
+@SessionScoped
 public class LoginMB {
 
 	private static final String MSG_ERRO_VALIDACAO_SENHA = "Senhas informadas estão diferentes!";
@@ -32,7 +31,8 @@ public class LoginMB {
 		Usuario retorno = new Usuario();
 		retorno = usuarioService.validarLogin(usuario);
 		
-		if (retorno.getLogin().equals(usuario.getLogin()) && retorno.getSenha().equals(usuario.getSenha())) {
+		if (retorno.getLogin().equalsIgnoreCase(usuario.getLogin()) && retorno.getSenha().equals(usuario.getSenha())) {
+			usuario = retorno;
 			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", retorno);
 			return "principal?faces-redirect=true";
 		}else {
@@ -100,9 +100,7 @@ public class LoginMB {
 	
 	public String logout(){
 		FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("usuario", null);
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);  
-		session.invalidate(); 
-		return "/paginas/login?faces-redirect=true";
+		return "/paginas/principal/login.jsf";
 	}
 	
 	public static String getURLWithContextPath(HttpServletRequest request) {

@@ -1,6 +1,5 @@
 package br.com.sisAmostra.Entity;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -31,7 +30,7 @@ public class DevolucaoAmostra {
 	private String descricao;
 	
 	@Column
-	private Calendar dtDevolucao;
+	private Date dtDevolucao;
 	
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="idMotivo")
@@ -41,8 +40,10 @@ public class DevolucaoAmostra {
 	@JoinColumn(name="idUsuario")
 	private Usuario usuario;
 	
-	private transient Date dtDevolucaoBean;
-
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idAmostra")
+	private Amostra amostra;
+	
 	public Integer getIdDevolucao() {
 		return idDevolucao;
 	}
@@ -59,11 +60,11 @@ public class DevolucaoAmostra {
 		this.descricao = descricao;
 	}
 
-	public Calendar getDtDevolucao() {
+	public Date getDtDevolucao() {
 		return dtDevolucao;
 	}
 
-	public void setDtDevolucao(Calendar dtDevolucao) {
+	public void setDtDevolucao(Date dtDevolucao) {
 		this.dtDevolucao = dtDevolucao;
 	}
 
@@ -83,12 +84,12 @@ public class DevolucaoAmostra {
 		this.usuario = usuario;
 	}
 
-	public Date getDtDevolucaoBean() {
-		return dtDevolucaoBean;
+	public Amostra getAmostra() {
+		return amostra;
 	}
 
-	public void setDtDevolucaoBean(Date dtDevolucaoBean) {
-		this.dtDevolucaoBean = dtDevolucaoBean;
+	public void setAmostra(Amostra amostra) {
+		this.amostra = amostra;
 	}
 	
 }

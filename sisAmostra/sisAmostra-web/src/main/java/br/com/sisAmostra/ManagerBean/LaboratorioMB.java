@@ -1,7 +1,6 @@
 package br.com.sisAmostra.ManagerBean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -40,8 +39,6 @@ public class LaboratorioMB {
 	public void salvar() {
 		
 		try {
-			laboratorio.setDtUltAlteracao(Calendar.getInstance());
-			laboratorio.setUsuUltAlteracao("123456");
 			laboratorioService.inserirOuAtualizar(laboratorio);
 			
 			laboratorio = new Laboratorio();
@@ -50,13 +47,14 @@ public class LaboratorioMB {
 			
 			FacesContext.getCurrentInstance().addMessage("sucesso", new FacesMessage(FacesMessage.SEVERITY_INFO, "Laboratório cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 
 	private void limpar() {
 		cadastrar = Boolean.FALSE;
 		editar = Boolean.FALSE;
+		laboratorio = new Laboratorio();
 	}
 
 	public void deletar() {
@@ -70,7 +68,7 @@ public class LaboratorioMB {
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Laboratório deletada com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	
@@ -79,7 +77,7 @@ public class LaboratorioMB {
 		listLaboratorios = new ArrayList<>();
 	}
 	
-	public void alterar(Laboratorio laboratorio){
+	public void alterar(){
 		editar = Boolean.TRUE;
 		listLaboratorios = new ArrayList<>();
 	}

@@ -1,7 +1,6 @@
 package br.com.sisAmostra.ManagerBean;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -39,8 +38,9 @@ public class StatusAmostraMB {
 
 	public String salvar() {
 		try {
-			statusAmostra.setDtUltAlteracao(Calendar.getInstance());
-			statusAmostra.setUsuUltAlteracao("123456");
+			if(statusAmostra.getIdStatus() == null){
+				statusAmostra.setIdStatus(statusAmostraService.sequence());
+			}	
 			statusAmostraService.inserirOuAtualizar(statusAmostra);
 			
 			statusAmostra = new StatusAmostra();
@@ -49,7 +49,7 @@ public class StatusAmostraMB {
 			
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Status Amostra cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 		return null;
 	}
@@ -69,7 +69,7 @@ public class StatusAmostraMB {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Status Amostra deletada com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 		return null;
 	}

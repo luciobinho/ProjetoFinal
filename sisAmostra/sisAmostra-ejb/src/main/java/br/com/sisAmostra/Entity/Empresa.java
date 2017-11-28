@@ -19,7 +19,7 @@ public class Empresa {
 	@Id
 	@Column
 	@GeneratedValue
-	private Integer idEmpresa;
+	private Long idEmpresa;
 	
 	@Column
 	private String descricao;
@@ -39,11 +39,11 @@ public class Empresa {
 	@Column
 	private String responsavel;
 	
-	public Integer getIdEmpresa() {
+	public Long getIdEmpresa() {
 		return idEmpresa;
 	}
 
-	public void setIdEmpresa(Integer idEmpresa) {
+	public void setIdEmpresa(Long idEmpresa) {
 		this.idEmpresa = idEmpresa;
 	}
 

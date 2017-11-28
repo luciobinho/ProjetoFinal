@@ -17,7 +17,7 @@ import br.com.sisAmostra.Service.ProdutoService;
 @ViewScoped
 public class ProdutoMB {
 
-	private Produto Produto = new Produto();
+	private Produto produto = new Produto();
 	private List<Produto> listProdutos;
 
 	public boolean cadastrar;
@@ -39,35 +39,36 @@ public class ProdutoMB {
 	public void salvar() {
 		
 		try {
-			ProdutoService.inserirOuAtualizar(Produto);
+			ProdutoService.inserirOuAtualizar(produto);
 			
-			Produto = new Produto();
+			produto = new Produto();
 			carregarListas();
 			limpar();
 			
 			FacesContext.getCurrentInstance().addMessage("sucesso", new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 
 	private void limpar() {
 		cadastrar = Boolean.FALSE;
 		editar = Boolean.FALSE;
+		produto = new Produto();
 	}
 
 	public void deletar() {
 		try {
-			ProdutoService.excluir(Produto);
+			ProdutoService.excluir(produto);
 			
 			carregarListas();
 			
-			Produto = new Produto();
+			produto = new Produto();
 
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage(FacesMessage.SEVERITY_INFO, "Produto deletada com sucesso!", ""));
 		} catch (Exception e) {
-			// TODO: handle exception
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	
@@ -76,7 +77,7 @@ public class ProdutoMB {
 		listProdutos = new ArrayList<>();
 	}
 	
-	public void alterar(Produto Produto){
+	public void alterar(){
 		editar = Boolean.TRUE;
 		listProdutos = new ArrayList<>();
 	}
@@ -87,11 +88,11 @@ public class ProdutoMB {
 	}
 
 	public Produto getProduto() {
-		return Produto;
+		return produto;
 	}
 
-	public void setProduto(Produto Produto) {
-		this.Produto = Produto;
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 	public List<Produto> getListProdutos() {

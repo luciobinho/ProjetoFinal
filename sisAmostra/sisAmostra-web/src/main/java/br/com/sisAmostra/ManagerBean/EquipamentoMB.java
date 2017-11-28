@@ -108,8 +108,8 @@ public class EquipamentoMB {
 
 	public void salvar() {
 		try {
-			equipamento.setLaboratorio(laboratorioService.buscar(idLaboratorio.intValue()));
-			equipamento.setStatusEquipamento(statusEquipamentoService.buscar(idStatus.intValue()));
+			equipamento.setLaboratorio(laboratorioService.buscar(idLaboratorio));
+			equipamento.setStatusEquipamento(statusEquipamentoService.buscar(idStatus));
 			equipamentoService.inserirOuAtualizar(equipamento);
 			
 			equipamento = new Equipamento();
@@ -118,7 +118,7 @@ public class EquipamentoMB {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Equipamento cadastrado/alterado com sucesso!", ""));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, " Erro ao cadastrar/alterar equipamento.", ""));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	
@@ -133,7 +133,7 @@ public class EquipamentoMB {
 
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Equipamento excluído com sucesso!", ""));
 		} catch (Exception e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, " Erro ao excluir o equipamento.", ""));
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Erro - " + e.getMessage()+e.getCause(), ""));
 		}
 	}
 	

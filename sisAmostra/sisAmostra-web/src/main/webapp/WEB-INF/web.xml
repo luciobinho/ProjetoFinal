@@ -42,5 +42,4 @@
 		<welcome-file>/paginas/principal/login.jsf</welcome-file>
 	</welcome-file-list>
 	
-	
 </web-app>

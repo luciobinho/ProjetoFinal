@@ -1,8 +1,9 @@
 package br.com.sisAmostra.Entity;
 
-import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,13 +12,14 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Analise")
 @NamedQueries({
-	@NamedQuery(name = "Analise.findAll", query = "SELECT A FROM Analise A")
+	@NamedQuery(name = "Analise.findAll", query = "SELECT A FROM Analise A ")
 })
 
 public class Analise {
@@ -25,19 +27,28 @@ public class Analise {
 	@Id
 	@Column
 	@GeneratedValue
-	private Integer idAnalise;
+	private Long idAnalise;
 	
 	@Column
 	private String descricao;
 	
 	@Column
-	private Calendar dtAnalise;
+	private Date dtAnalise;
 	
 	@OneToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name="idTarefa")
-	private Tarefa tarefa;
+	@JoinColumn(name="idAmostra")
+	private Amostra amostra;
 	
-	private transient Date dtAnaliseBean;
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idStatus")
+	private StatusAnalise statusAnalise;
+	
+	@OneToOne(fetch=FetchType.EAGER)
+	@JoinColumn(name="idUsuario")
+	private Usuario usuario;
+	
+	@OneToMany(mappedBy = "analise", targetEntity = Resultado.class, fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Resultado> resultados;
 
 	public String getDescricao() {
 		return descricao;
@@ -47,36 +58,52 @@ public class Analise {
 		this.descricao = descricao;
 	}
 
-	public Integer getIdAnalise() {
+	public Long getIdAnalise() {
 		return idAnalise;
 	}
 
-	public void setIdAnalise(Integer idAnalise) {
+	public void setIdAnalise(Long idAnalise) {
 		this.idAnalise = idAnalise;
 	}
 
-	public Calendar getDtAnalise() {
+	public Date getDtAnalise() {
 		return dtAnalise;
 	}
 
-	public void setDtAnalise(Calendar dtAnalise) {
+	public void setDtAnalise(Date dtAnalise) {
 		this.dtAnalise = dtAnalise;
 	}
 
-	public Tarefa getTarefa() {
-		return tarefa;
+	public Amostra getAmostra() {
+		return amostra;
 	}
 
-	public void setTarefa(Tarefa tarefa) {
-		this.tarefa = tarefa;
+	public void setAmostra(Amostra amostra) {
+		this.amostra = amostra;
 	}
 
-	public Date getDtAnaliseBean() {
-		return dtAnaliseBean;
+	public Usuario getUsuario() {
+		return usuario;
 	}
 
-	public void setDtAnaliseBean(Date dtAnaliseBean) {
-		this.dtAnaliseBean = dtAnaliseBean;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public StatusAnalise getStatusAnalise() {
+		return statusAnalise;
+	}
+
+	public void setStatusAnalise(StatusAnalise statusAnalise) {
+		this.statusAnalise = statusAnalise;
+	}
+
+	public List<Resultado> getResultados() {
+		return resultados;
+	}
+
+	public void setResultados(List<Resultado> resultados) {
+		this.resultados = resultados;
 	}
 
 }

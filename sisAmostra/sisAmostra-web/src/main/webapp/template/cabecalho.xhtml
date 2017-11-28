@@ -4,11 +4,17 @@
 
 	<header id="topnav"
 		class="navbar navbar-inverse navbar-fixed-top clearfix" role="banner">
-
-		<a id="leftmenu-trigger" class="" data-toggle="tooltip"
-			data-placement="right" title="Toggle Sidebar"></a> <a
-			class="navbar-brand" href="index.html">Gerenciador de Amostras</a>
-
+		<h:form>
+			<a id="leftmenu-trigger" class="" data-toggle="tooltip" data-placement="right" title="Toggle Sidebar"/>
+			<a href="#" class="pull-right btn btn-link btn-xs hidden-print dropdown-toggle username" data-toggle="dropdown" aria-expanded="false">
+				<h:outputText value="#{loginMB.usuario.nome}"/>
+			</a>
+			<ul class="dropdown-menu userinfo">
+				<li>
+					<h:commandLink action="#{loginMB.logout()}" value="Sign Out" rendered="true"/>
+				</li>
+			</ul>
+		</h:form>
 	</header>
 
 </ui:composition>
